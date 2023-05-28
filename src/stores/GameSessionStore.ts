@@ -74,16 +74,16 @@ export const currentPath = derived(
 	gameSession,
 	$gameSession => $gameSession.state.currentPath
 );
-export const currentHover = derived(
-	gameSession,
-	$gameSession => $gameSession.state.currentHover
-);
 export const currentCoordinate = derived(
 	gameSession,
 	$gameSession => {
 		let cp = $gameSession.state.currentPath;
 		return cp.length > 0 ? cp[cp.length - 1] : $gameSession.sourceCoordinate;
 	}
+);
+export const currentHover = derived(
+	gameSession,
+	$gameSession => $gameSession.state.currentHover
 );
 export const isVictory = derived(
 	[gameSession, currentCoordinate],

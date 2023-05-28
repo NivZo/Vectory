@@ -4,7 +4,7 @@ import type { Coordinate } from "../types/Coordinate";
 export type DrawEngine = {
     drawGrid: () => void,
     drawAxes: () => void,
-    drawPoint: (crd: Coordinate, color: string) => void,
+    drawPoint: (crd: Coordinate, includeText: boolean, color: string) => void,
     drawVector: (source: Coordinate, target: Coordinate, color: string) => void,
 }
 
@@ -13,6 +13,10 @@ export const initDrawEngine = (canvas: HTMLCanvasElement, axisLength: number): D
     const height = canvas.height;
     const step = width / axisLength;
     const halfAxisLength = axisLength / 2;
+    const fontSize = 15;
+    const axisWidth = 1;
+    const notchHeight = 10;
+    const notchWidth = 2;
     const ctx = canvas.getContext('2d');
 
     return {
@@ -23,17 +27,56 @@ export const initDrawEngine = (canvas: HTMLCanvasElement, axisLength: number): D
 
             for (let x = -halfAxisLength; x <= halfAxisLength; x++) {
                 const xPos = (x + halfAxisLength) * step;
+                ctx.lineWidth = axisWidth;
+                ctx.strokeStyle = '#ccc';
                 ctx.moveTo(xPos, 0);
                 ctx.lineTo(xPos, height);
+                ctx.stroke();
+
+                if (x % 2 === 0 && x != 0 && x < axisLength/2 && x > -axisLength/2) {
+                    // number
+                    ctx.font = `${fontSize}px Arial`;
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(x.toString(), xPos, height/2 + 25);
+
+                }
+                // notch
+                ctx.beginPath();
+                ctx.moveTo(xPos, height/2);
+                ctx.lineTo(xPos, height/2 + notchHeight);
+                ctx.strokeStyle = "black";
+                ctx.fillStyle = "black";
+                ctx.lineWidth = notchWidth;
+                ctx.stroke();
             }
 
             for (let y = -halfAxisLength; y <= halfAxisLength; y++) {
                 const yPos = (y + halfAxisLength) * step;
+                ctx.lineWidth = axisWidth;
+                ctx.strokeStyle = '#ccc';
                 ctx.moveTo(0, yPos);
                 ctx.lineTo(width, yPos);
-            }
+                ctx.stroke();
 
-            ctx.stroke();
+                if (y % 2 === 0 && y != 0 && y < axisLength/2 && y > -axisLength/2) {
+                    ctx.font = `${fontSize}px Arial`;
+                    ctx.fillStyle = 'black';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(y.toString(), width/2 - 25, yPos + fontSize/3);
+                }
+                // notch
+                ctx.beginPath();
+                ctx.moveTo(width/2, yPos);
+                ctx.lineTo(width/2 - notchHeight, yPos);
+                ctx.strokeStyle = "black";
+                ctx.fillStyle = "black";
+                ctx.lineWidth = notchWidth;
+                ctx.stroke();
+
+                ctx.lineWidth = axisWidth;
+                ctx.strokeStyle = '#ccc';
+            }
         },
 
         drawAxes: () => {
@@ -53,7 +96,7 @@ export const initDrawEngine = (canvas: HTMLCanvasElement, axisLength: number): D
             ctx.stroke();
         },
 
-        drawPoint: (crd: Coordinate, color: string) => {
+        drawPoint: (crd: Coordinate, includeText: boolean, color: string) => {
             const xPos = (crd.x + halfAxisLength) * step;
             const yPos = height - (crd.y + halfAxisLength) * step;
 
@@ -61,6 +104,13 @@ export const initDrawEngine = (canvas: HTMLCanvasElement, axisLength: number): D
             ctx.beginPath();
             ctx.arc(xPos, yPos, 5, 0, 2 * Math.PI);
             ctx.fill();
+
+            if (includeText) {
+                ctx.fillStyle = color;
+                const xOffest = 20 // crd.x > 10 ? 2*fontSize : -2*fontSize;
+                const yOffest = 20 // crd.y > 10 ? 2*fontSize : -2*fontSize;
+                ctx.fillText(`(${crd.x} , ${crd.y})`, xPos + xOffest, yPos + yOffest);
+            }
         },
 
         drawVector: (source: Coordinate, target: Coordinate, color: string) => {

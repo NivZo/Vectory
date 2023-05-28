@@ -186,7 +186,7 @@ export const puzzles: RawGameConfiguration[] = [
                 "name": "xPlus4_yPlus1"
             }
         ],
-        "boardSideSize": 8,
+        "boardSideSize": 10,
         "maxMoves": 6
     },
     {
@@ -280,7 +280,7 @@ export const puzzles: RawGameConfiguration[] = [
                 "name": "xPlus4_yPlus1"
             }
         ],
-        "boardSideSize": 8,
+        "boardSideSize": 10,
         "maxMoves": 6
     },
     {
@@ -421,7 +421,7 @@ export const puzzles: RawGameConfiguration[] = [
                 "name": "xPlus4_yPlus1"
             }
         ],
-        "boardSideSize": 8,
+        "boardSideSize": 10,
         "maxMoves": 6
     },
     {
@@ -656,7 +656,7 @@ export const puzzles: RawGameConfiguration[] = [
                 "name": "xPlus4_yPlus1"
             }
         ],
-        "boardSideSize": 8,
+        "boardSideSize": 10,
         "maxMoves": 6
     },
     {

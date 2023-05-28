@@ -21,11 +21,11 @@
         Hover: string;
     };
     let COLORS: Palette = {
-        Source: "green",
+        Source: "yellow",
         Target: "red",
         Path: "blue",
-        CurrentCoordinate: "yellow",
-        Hover: "lightblue",
+        CurrentCoordinate: "green",
+        Hover: "purple",
     };
 
     const initCanvas = () => {
@@ -47,22 +47,22 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawEngine.drawGrid();
             drawEngine.drawAxes();
-            drawEngine.drawPoint($gameSession.sourceCoordinate, COLORS.Source);
-            drawEngine.drawPoint($gameSession.targetCoordinate, COLORS.Target);
+            drawEngine.drawPoint($gameSession.sourceCoordinate, false, COLORS.Source);
+            drawEngine.drawPoint($gameSession.targetCoordinate, false, COLORS.Target);
 
             for (let i = 1; i < p.length; i++) {
                 drawEngine.drawVector(p[i - 1], p[i], COLORS.Path);
-                drawEngine.drawPoint(p[i], COLORS.Path);
+                drawEngine.drawPoint(p[i], false, COLORS.Path);
             }
 
             if (p.length > 1)
-                drawEngine.drawPoint(p[p.length - 1], COLORS.CurrentCoordinate);
+                drawEngine.drawPoint(p[p.length - 1], true, COLORS.CurrentCoordinate);
         });
 
         // draw hover
         currentHover.subscribe((hoverCrd) => {
             if (hoverCrd != null) {
-                drawEngine.drawPoint(hoverCrd, COLORS.Hover);
+                drawEngine.drawPoint(hoverCrd, true, COLORS.Hover);
                 drawEngine.drawVector($currentCoordinate, hoverCrd, COLORS.Hover);
             }
         });
