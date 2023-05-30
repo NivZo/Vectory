@@ -1,0 +1,90 @@
+svg {
+    width: 100vw;
+    height: 50vh;
+    margin: auto;
+    background-color: white;
+}
+
+@keyframes hover-reveal {
+    to {
+        stroke-opacity: 20%;
+    }
+}
+
+@keyframes path-reveal {
+    to {
+        stroke-opacity: 60%;
+    }
+}
+
+circle.path-crd {
+    fill: lightsteelblue;
+    fill-opacity: 0.6;
+    stroke: rgb(0, 0, 0);
+    stroke-opacity: 20%;
+    animation: path-reveal 0.2s linear forwards;
+}
+
+circle.hover-crd {
+    fill: orange;
+    fill-opacity: 0.2;
+    stroke: rgb(0, 0, 0);
+    stroke-opacity: 0%;
+    animation: hover-reveal 0.2s linear forwards;
+}
+
+circle.current-crd {
+    fill: lightseagreen;
+}
+
+circle.target-crd {
+    fill: orangered;
+    fill-opacity: 0.6;
+    stroke: rgb(0, 0, 0);
+}
+
+.path-vector {
+    stroke: rgb(0, 0, 0);
+    stroke-dashoffset: 1000;
+    stroke-opacity: 20%;
+    animation: path-reveal 0.2s linear forwards;
+}
+
+.hover-vector {
+    stroke: rgb(0, 0, 0);
+    stroke-opacity: 0%;
+    animation: hover-reveal 0.2s linear forwards;
+}
+
+.tick line {
+    stroke: #ddd;
+    stroke-dasharray: 0.2vmax;
+}
+
+line.cross-axis {
+    stroke-width: 0.25vmax;
+    stroke-dasharray: none;
+}
+
+.vertical-axis line.cross-axis {
+    stroke: olivedrab;
+    stroke-opacity: 30%;
+}
+
+.horizontal-axis line.cross-axis {
+    stroke: blue;
+    stroke-opacity: 30%;
+}
+
+text {
+    font-size: 14px;
+    fill: #999;
+}
+
+.vertical-axis text {
+    text-anchor: middle;
+}
+
+.horizontal-axis text {
+    text-anchor: end;
+}

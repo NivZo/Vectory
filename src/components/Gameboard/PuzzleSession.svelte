@@ -1,6 +1,6 @@
 <script>
     import { onMount } from "svelte";
-    import Graph from "./Graph.svelte";
+    import Graph from "./Graph/Graph.svelte";
     import {
         gameSession,
         currentCoordinate,
@@ -8,17 +8,14 @@
         remainingMoves,
     } from "../../stores/GameSessionStore";
     import { display } from "../../stores/DisplayStore";
-    import UndoButton from "../UndoButton.svelte";
-    import NewGameButton from "../NewGameButton.svelte";
-    import OperationButton from "../OperationButton.svelte";
+    import UndoButton from "./Buttons/UndoButton.svelte";
+    import NewGameButton from "../Gameboard/Buttons/NewGameButton.svelte";
+    import OperationButton from "../Gameboard/Buttons/OperationButton.svelte";
     import { getSessionDomain } from "../../utils/mathUtils";
+    import ResetButton from "./Buttons/ResetButton.svelte";
 
     onMount(() => {
         gameSession.resetGameState();
-        console.table({
-            sourceCoordinate: $gameSession.sourceCoordinate,
-            path: $currentPath,
-        });
     });
 
     $: domain = getSessionDomain($gameSession.boardSideSize, $display);
@@ -47,5 +44,6 @@
         <OperationButton {operation} {domain}/>
     {/each}
     <UndoButton />
+    <ResetButton />
     <NewGameButton />
 </div>

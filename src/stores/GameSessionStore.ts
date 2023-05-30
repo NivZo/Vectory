@@ -43,8 +43,7 @@ const createGameSession = () => {
 			})
 			if (isInDomain(newCrd, domain))
 				gs.state.currentPath.push(newCrd);
-			else
-				gs.state.currentHover = null;
+			gs.state.currentHover = null;
 			return gs;
 		}),
 		addHoverCoordinate: (hoverCrd: Coordinate, domain: Domain) => update(gs => {
@@ -65,7 +64,7 @@ const createGameSession = () => {
 		reset: () => set(emptyGameSession),
 		resetGameState: () => update(gs => {
 			gs.state = {
-				currentPath: [],
+				currentPath: [gs.sourceCoordinate],
 				currentHover: null,
 			};
 
@@ -75,10 +74,6 @@ const createGameSession = () => {
 }
 
 export const gameSession = createGameSession();
-export const canvasSize = derived(
-	gameSession,
-	$gameSession => $gameSession.boardSideSize
-)
 export const currentPath = derived(
 	gameSession,
 	$gameSession => $gameSession.state.currentPath

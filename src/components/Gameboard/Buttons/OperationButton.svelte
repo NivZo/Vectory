@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { currentCoordinate, gameSession, isPlayable } from "../stores/GameSessionStore";
-    import { onHoverOrMouseDown } from "../utils/hoverUtils";
-    import type { Coordinate } from "../types/Coordinate";
-    import type { Operation } from "../types/Operation";
-    import type { Domain } from "../types/Display";
+    import { currentCoordinate, gameSession, isPlayable } from "../../../stores/GameSessionStore";
+    import { onHoverOrMouseDown } from "../../../utils/hoverUtils";
+    import type { Coordinate } from "../../../types/Coordinate";
+    import type { Operation } from "../../../types/Operation";
+    import type { Domain } from "../../../types/Display";
 
     export let operation: Operation;
     export let domain: Domain;
@@ -27,7 +27,7 @@
 
 <button
     use:onHoverOrMouseDown={hoverOperation}
-    on:click={applyOperation}
+    on:click|preventDefault={applyOperation}
     on:mouseleave={gameSession.removeHoverCoordinate}
     disabled={!$isPlayable}>
     {operation.name}
