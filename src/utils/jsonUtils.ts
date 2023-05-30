@@ -11,8 +11,6 @@ export const getRandomGameConfiguration = (): GameConfiguration => {
     const randomIndex = Math.floor(Math.random() * puzzles.length);
     const rawGameConf = puzzles[randomIndex];
 
-    console.log(rawGameConf);
-
     const gameConf: GameConfiguration = {
         ...rawGameConf,
         operations: []

@@ -21,6 +21,8 @@
   },
   "dependencies": {
     "@sveltejs/vite-plugin-svelte": "^2.4.1",
+    "@types/d3-scale": "^4.0.3",
+    "d3-scale": "^4.0.2",
     "vite": "^4.3.9"
   }
 }

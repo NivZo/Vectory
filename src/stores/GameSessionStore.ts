@@ -1,6 +1,7 @@
 import { derived, writable } from 'svelte/store';
 import type { GameConfiguration, GameSession } from '../types/GameSession';
 import type { Coordinate } from '../types/Coordinate';
+import type { Domain } from '../types/Display';
 
 const emptyGameSession: GameSession = {
 	sourceCoordinate: { x: 0, y: 0 },
@@ -15,7 +16,11 @@ const emptyGameSession: GameSession = {
 	loaded: false,
 };
 
-const isBetweenSym = (value: number, symRangeSize: number) => symRangeSize >= 0 && value >= -symRangeSize && value <= symRangeSize;
+const isInDomain = (crd: Coordinate, domain: Domain) => 
+	crd.x >= domain.x[0] &&
+	crd.x <= domain.x[1] &&
+	crd.y >= domain.y[0] &&
+	crd.y <= domain.y[1];
 
 const createGameSession = () => {
 	const { subscribe, set, update } = writable<GameSession>(emptyGameSession);
@@ -26,21 +31,24 @@ const createGameSession = () => {
 		setGameConfiguration: (gameConfig: GameConfiguration) => set({
 			...gameConfig,
 			state: {
-				currentPath: [],
+				currentPath: [gameConfig.sourceCoordinate],
 				currentHover: null,
 			},
 			loaded: true,
 		}),
-		addCoordinate: (newCrd: Coordinate) => update(gs => {
-			if (isBetweenSym(newCrd.x, gs.boardSideSize/2) && isBetweenSym(newCrd.y, gs.boardSideSize/2))
+		addCoordinate: (newCrd: Coordinate, domain: Domain) => update(gs => {
+			console.table({
+				newCrd,
+				domain,
+			})
+			if (isInDomain(newCrd, domain))
 				gs.state.currentPath.push(newCrd);
 			else
-				console.log("a")
-			gs.state.currentHover = null;
+				gs.state.currentHover = null;
 			return gs;
 		}),
-		addHoverCoordinate: (hoverCrd: Coordinate) => update(gs => {
-			if (isBetweenSym(hoverCrd.x, gs.boardSideSize/2) && isBetweenSym(hoverCrd.y, gs.boardSideSize/2))
+		addHoverCoordinate: (hoverCrd: Coordinate, domain: Domain) => update(gs => {
+			if (isInDomain(hoverCrd, domain))
 				gs.state.currentHover = hoverCrd;
 			return gs;
 		}),
@@ -60,6 +68,7 @@ const createGameSession = () => {
 				currentPath: [],
 				currentHover: null,
 			};
+
 			return gs;
 		})
 	};
