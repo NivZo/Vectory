@@ -2,7 +2,7 @@ svg {
     width: 100vw;
     height: 50vh;
     margin: auto;
-    background-color: white;
+    background-color: var(--primaryBackground);
 }
 
 @keyframes hover-reveal {
@@ -18,46 +18,46 @@ svg {
 }
 
 circle.path-crd {
-    fill: lightsteelblue;
+    fill: var(--primaryPath);
     fill-opacity: 0.6;
-    stroke: rgb(0, 0, 0);
+    stroke: var(--primaryStroke);
     stroke-opacity: 20%;
-    animation: path-reveal 0.2s linear forwards;
+    animation: path-reveal 0.2s ease-in forwards;
 }
 
 circle.hover-crd {
-    fill: orange;
+    fill: var(--primaryPath);
     fill-opacity: 0.2;
-    stroke: rgb(0, 0, 0);
+    stroke: var(--primaryStroke);
     stroke-opacity: 0%;
     animation: hover-reveal 0.2s linear forwards;
 }
 
 circle.current-crd {
-    fill: lightseagreen;
+    fill: var(--primaryCurrent);
 }
 
 circle.target-crd {
-    fill: orangered;
+    fill: var(--primaryGoal);
     fill-opacity: 0.6;
     stroke: rgb(0, 0, 0);
 }
 
 .path-vector {
-    stroke: rgb(0, 0, 0);
+    stroke: var(--primaryStroke);
     stroke-dashoffset: 1000;
     stroke-opacity: 20%;
-    animation: path-reveal 0.2s linear forwards;
+    animation: path-reveal 0.2s ease-in forwards;
 }
 
 .hover-vector {
-    stroke: rgb(0, 0, 0);
+    stroke: var(--primaryStroke);
     stroke-opacity: 0%;
     animation: hover-reveal 0.2s linear forwards;
 }
 
 .tick line {
-    stroke: #ddd;
+    stroke: var(--primaryGrid);
     stroke-dasharray: 0.2vmax;
 }
 
@@ -71,18 +71,18 @@ line.cross-axis {
 }
 
 .vertical-axis line.cross-axis {
-    stroke: olivedrab;
+    stroke: var(--primaryXAxis);
     stroke-opacity: 30%;
 }
 
 .horizontal-axis line.cross-axis {
-    stroke: blue;
+    stroke: var(--primaryYAxis);
     stroke-opacity: 30%;
 }
 
 text {
     font-size: 14px;
-    fill: #999;
+    fill: var(--primaryText);
 }
 
 .vertical-axis text {

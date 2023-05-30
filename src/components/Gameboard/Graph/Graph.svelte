@@ -88,9 +88,11 @@
             class="path-crd"
             class:current-crd={i == $currentPath.length - 1}
         />
-        <text x={xScale(crd.x) + fontSize} y={yScale(crd.y) + fontSize}
-            >P{i} ({crd.x},{crd.y})</text
-        >
+        {#if i == $currentPath.length - 1}
+            <text x={xScale(crd.x) + fontSize} y={yScale(crd.y) + fontSize}
+                >P{i} ({crd.x},{crd.y})</text
+            >
+        {/if}
     {/each}
 
     {#if $currentHover}

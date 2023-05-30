@@ -8,11 +8,8 @@
         remainingMoves,
     } from "../../stores/GameSessionStore";
     import { display } from "../../stores/DisplayStore";
-    import UndoButton from "./Buttons/UndoButton.svelte";
-    import NewGameButton from "../Gameboard/Buttons/NewGameButton.svelte";
-    import OperationButton from "../Gameboard/Buttons/OperationButton.svelte";
     import { getSessionDomain } from "../../utils/mathUtils";
-    import ResetButton from "./Buttons/ResetButton.svelte";
+    import ButtonPanel from "./Buttons/ButtonPanel/ButtonPanel.svelte";
 
     onMount(() => {
         gameSession.resetGameState();
@@ -23,6 +20,7 @@
 
 <div class="puzzle-session">
     <Graph {domain}/>
+    <ButtonPanel {domain}/>
 
     <div>Current: {$currentCoordinate.x}, {$currentCoordinate.y}</div>
     <div>
@@ -40,10 +38,4 @@
     <div>
         Remaining Moves: {$remainingMoves}
     </div>
-    {#each $gameSession.operations as operation}
-        <OperationButton {operation} {domain}/>
-    {/each}
-    <UndoButton />
-    <ResetButton />
-    <NewGameButton />
 </div>

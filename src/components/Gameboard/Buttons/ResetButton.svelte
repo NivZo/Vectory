@@ -1,7 +1,6 @@
 <script lang="ts">
     import { currentPath, gameSession } from "../../../stores/GameSessionStore";
+    import Button from "./Button/Button.svelte";
 </script>
 
-<button on:click|preventDefault={gameSession.resetGameState} disabled={$currentPath.length <= 1}>
-    Reset
-</button>
+<Button onClick={gameSession.resetGameState} isEnabled={!($currentPath.length <= 1)} text="Reset"/>

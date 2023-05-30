@@ -1,6 +1,7 @@
 <script lang="ts">
   import { gameSession } from "../../../stores/GameSessionStore";
   import { getRandomGameConfiguration } from "../../../utils/jsonUtils";
+    import Button from "./Button/Button.svelte";
 
   const initGameSession = () => {
     const gameConfiguration = getRandomGameConfiguration();
@@ -8,4 +9,4 @@
   };
 </script>
 
-<button on:click|preventDefault={initGameSession}> New </button>
+<Button onClick={initGameSession} text="New"/>

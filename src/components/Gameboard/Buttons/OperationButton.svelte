@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { currentCoordinate, gameSession, isPlayable } from "../../../stores/GameSessionStore";
-    import { onHoverOrMouseDown } from "../../../utils/hoverUtils";
+    import { currentCoordinate, gameSession, isPlayable, isVictory } from "../../../stores/GameSessionStore";
     import type { Coordinate } from "../../../types/Coordinate";
     import type { Operation } from "../../../types/Operation";
     import type { Domain } from "../../../types/Display";
+    import Button from "./Button/Button.svelte";
 
     export let operation: Operation;
     export let domain: Domain;
@@ -22,13 +22,14 @@
             y: operation.yOperation($currentCoordinate),
         }
         gameSession.addHoverCoordinate(newCoordinate, domain);
+        console.table($isVictory)
     }
 </script>
 
-<button
-    use:onHoverOrMouseDown={hoverOperation}
-    on:click|preventDefault={applyOperation}
-    on:mouseleave={gameSession.removeHoverCoordinate}
-    disabled={!$isPlayable}>
-    {operation.name}
-</button>
+<Button
+    onHover={hoverOperation}
+    onClick={applyOperation}
+    onMouseLeave={gameSession.removeHoverCoordinate}
+    isEnabled={$isPlayable}
+    text={operation.name} 
+    />

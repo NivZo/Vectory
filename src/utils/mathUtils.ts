@@ -28,9 +28,6 @@ export const rangeAroundZero = (from: number, to: number, step: number = 1): Arr
 
     const leftHalf: Array<number> = range(from, 0, step, true)
     const rightHalf = range(step, to, step);
-    console.table({
-        step, leftHalf, rightHalf
-    })
     return leftHalf && rightHalf ? [...leftHalf, ...rightHalf] : [];
 }
 

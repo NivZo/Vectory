@@ -1,6 +1,6 @@
 import type { GameConfiguration, RawGameConfiguration } from "../types/GameSession";
 import { operationFromConfiguration } from "./operationUtils";
-import { puzzles } from "../data/puzzles";
+import { puzzles } from "../data/puzzles-3";
 
 export const parseGameConfiguration = (gameConf: string): RawGameConfiguration => {
     let parsed: RawGameConfiguration = JSON.parse(gameConf);

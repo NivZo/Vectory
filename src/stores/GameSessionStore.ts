@@ -16,7 +16,7 @@ const emptyGameSession: GameSession = {
 	loaded: false,
 };
 
-const isInDomain = (crd: Coordinate, domain: Domain) => 
+const isInDomain = (crd: Coordinate, domain: Domain) =>
 	crd.x >= domain.x[0] &&
 	crd.x <= domain.x[1] &&
 	crd.y >= domain.y[0] &&
@@ -37,10 +37,6 @@ const createGameSession = () => {
 			loaded: true,
 		}),
 		addCoordinate: (newCrd: Coordinate, domain: Domain) => update(gs => {
-			console.table({
-				newCrd,
-				domain,
-			})
 			if (isInDomain(newCrd, domain))
 				gs.state.currentPath.push(newCrd);
 			gs.state.currentHover = null;
@@ -91,7 +87,7 @@ export const currentHover = derived(
 );
 export const isVictory = derived(
 	[gameSession, currentCoordinate],
-	([gs, crd]) => gs.targetCoordinate.x === crd.x && gs.targetCoordinate.y === crd.y,
+	([gs, crd]) => gs.targetCoordinate.x == crd.x && gs.targetCoordinate.y == crd.y,
 );
 export const remainingMoves = derived(
 	gameSession,
@@ -99,7 +95,7 @@ export const remainingMoves = derived(
 );
 export const isPlayable = derived(
 	[isVictory, remainingMoves],
-	([iv, rm]) => !iv && rm > 0,
+	([iv, rm]) => iv ? false : rm > 0,
 );
 
 
