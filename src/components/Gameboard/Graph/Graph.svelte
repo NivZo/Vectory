@@ -27,9 +27,9 @@
         .domain(domain.y)
         .range([$halfHeight - padding.bottom, padding.top]);
 
-    $: xTicks = rangeAroundZero(...domain.x, $display.width > 180 ? 4 : 5);
+    $: xTicks = rangeAroundZero(...domain.x, $display.width > 200 ? 2 : 5);
 
-    $: yTicks = rangeAroundZero(...domain.y, $halfHeight > 180 ? 4 : 5);
+    $: yTicks = rangeAroundZero(...domain.y, $halfHeight > 200 ? 2 : 5);
 </script>
 
 <svg bind:this={svg}>
@@ -44,6 +44,7 @@
                     x1={padding.left}
                     x2={xScale(domain.x[1])}
                     class:cross-axis={lineId == 0}
+                    class:bold-tick={yTicks.indexOf(lineId) >= 0}
                 />
                 {#if yTicks.indexOf(lineId) >= 0}
                     <text x={padding.left - 8} y="+4">{lineId}</text>
@@ -60,6 +61,7 @@
                     y1={yScale(domain.y[0])}
                     y2={yScale(domain.y[1])}
                     class:cross-axis={lineId == 0}
+                    class:bold-tick={yTicks.indexOf(lineId) >= 0}
                 />
                 {#if xTicks.indexOf(lineId) >= 0}
                     <text y={$halfHeight - padding.bottom + 16}>{lineId}</text>

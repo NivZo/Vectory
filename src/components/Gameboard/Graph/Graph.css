@@ -61,6 +61,10 @@ circle.target-crd {
     stroke-dasharray: 0.2vmax;
 }
 
+line.bold-tick {
+    stroke-dasharray: 0;
+}
+
 line.cross-axis {
     stroke-width: 0.25vmax;
     stroke-dasharray: none;
