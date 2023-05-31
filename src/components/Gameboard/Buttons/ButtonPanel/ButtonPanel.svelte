@@ -5,22 +5,30 @@
     import ResetButton from "../ResetButton.svelte";
     import { gameSession } from "../../../../stores/GameSessionStore";
     import type { Domain } from "../../../../types/Display";
+    import { chunk } from "../../../../utils/mathUtils";
 
     export let domain: Domain;
+
+    $: heightPercentage = 100 / ($gameSession.operations.length / 3);
 </script>
 
-<div class="button-panel">
-    <div class="panel-row">
-        {#each $gameSession.operations as operation}
-            <OperationButton {operation} {domain} />
-        {/each}
-    </div>
+<div class="btn-panel">
+    {#each chunk($gameSession.operations, 3) as operationsChunk, i}
+        <div
+            class="btn-panel-row btn-panel-row-{i}"
+            style="--heightPercentage: {heightPercentage}%"
+        >
+            {#each operationsChunk as operation (operation.name)}
+                <OperationButton {operation} {domain} />
+            {/each}
+        </div>
+    {/each}
 
-    <div class="panel-row">
+    <div class="btn-panel-row">
         <UndoButton />
         <ResetButton />
         <NewGameButton />
     </div>
 </div>
 
-<style src="./ButtonPanel.css"></style>
+<style src="./ButtonPanel.scss"></style>

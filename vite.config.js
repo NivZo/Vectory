@@ -4,5 +4,10 @@ import {svelte} from '@sveltejs/vite-plugin-svelte'
 
 export default defineConfig({
     base: "/Vectory/",
-    plugins: [svelte()],
+    plugins: [svelte({
+        onwarn: (warning, handler) => {
+            if (warning.code.includes("a11y")) return
+            handler(warning);
+        }
+    })],
 })

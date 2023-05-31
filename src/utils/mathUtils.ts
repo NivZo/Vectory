@@ -31,6 +31,15 @@ export const rangeAroundZero = (from: number, to: number, step: number = 1): Arr
     return leftHalf && rightHalf ? [...leftHalf, ...rightHalf] : [];
 }
 
+export const chunk = <T>(array: Array<T>, chunkSize: number): Array<Array<T>> => {
+    const chunks = [];
+    for (let i = 0; i < array.length; i += chunkSize) {
+        chunks.push(array.slice(i, i + chunkSize));
+    }
+
+    return chunks;
+}
+
 const isHalfPortrait = (display: Display): boolean => (display.height) / 2 > display.width;
 
 export const getSessionDomain = (minimumSideCount: number, display: Display): Domain => {

@@ -2,23 +2,24 @@
 	import { onMount } from "svelte";
 	import { getRandomGameConfiguration } from "./utils/jsonUtils";
 	import { gameSession } from "./stores/GameSessionStore";
-    import Display from "./components/Utility/Display.svelte";
-    import PuzzleSession from "./components/Gameboard/PuzzleSession.svelte";
-	import type { Theme } from "./types/Theme";
+	import Display from "./components/Utility/Display.svelte";
+	import PuzzleSession from "./components/Gameboard/PuzzleSession.svelte";
 
 	let gameConfiguration;
 
 	onMount(() => {
 		gameConfiguration = getRandomGameConfiguration();
-		gameSession.setGameConfiguration(gameConfiguration)
-	})
+		gameSession.setGameConfiguration(gameConfiguration);
+	});
 
-	export let theme: Theme = "basic-theme"
+	export let theme = "alternate";
 </script>
 
-<main class={theme}>
-	<Display/>
-	<PuzzleSession/>
+<main class="{theme}-theme">
+	<div id="vectory-app">
+		<Display />
+		<PuzzleSession />
+	</div>
 </main>
 
-<style src="./App.css"></style>
+<style src="./App.scss"></style>

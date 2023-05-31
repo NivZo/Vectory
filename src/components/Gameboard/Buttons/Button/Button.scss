@@ -1,0 +1,69 @@
+@import '../../../../theme/themes.scss';
+
+
+$color-bg: #abb9c2;
+$color-bg-light: #c1c8cd;
+$color-bg-dark: #c1c5c9;
+$color-overlay: #B9B5AA;
+;
+$color-overlay-light: #B9B5AA;
+;
+$color-overlay-medium: #929ca3;
+$color-overlay-dark: #cdd4da;
+$color-tab-focus: #c8cbcd;
+
+.btn {
+  user-select: none;
+  width: cssVar(widthPrecentage);
+  height: cssVar(heightPercentage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: $color-bg;
+  border-radius: calc(cssVar(heightPercentage) / 2);
+  border: 0;
+  font-weight: 800;
+  text-align: center;
+  cursor: pointer;
+  margin: 1%;
+  letter-spacing: .05em;
+  transition: all 200ms ease;
+  box-shadow:
+    -1px -1px 1px $color-bg,
+    0 0 0 4px $color-overlay-medium,
+    1px 1px 1px $color-bg-dark,
+    inset .0 .0 .0 $color-overlay-dark,
+    inset .5rem .5rem .25rem $color-bg-light;
+
+  &::-moz-focus-inner {
+    outline: none;
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow:
+      -1px -1px 1px $color-bg-dark,
+      0 0 0 4px $color-tab-focus,
+      1px 1px 1px $color-bg-dark,
+      inset 0 0 0 $color-overlay-dark,
+      inset .5rem .5rem .25rem $color-bg-light,
+    ;
+  }
+
+  &.active {
+    transform: scale(0.9);
+    box-shadow:
+      inset 1px 1px 1px $color-bg,
+      0 0 0 4px $color-overlay-dark,
+      inset -1px -1px 1px $color-bg-light,
+      inset .5rem .5rem .75rem $color-bg-dark,
+      inset .5rem .5rem .5rem $color-bg-light,
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    cursor: auto;
+  }
+}

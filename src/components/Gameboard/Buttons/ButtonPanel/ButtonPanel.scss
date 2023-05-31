@@ -1,0 +1,12 @@
+@import '../../../../theme/themes.scss';
+
+.btn-panel {
+    height: 40vh;
+}
+
+.btn-panel .btn-panel-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: cssVar(heightPercentage)
+}

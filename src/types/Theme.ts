@@ -10,4 +10,4 @@ export type dep_Theme = {
     primaryGoal: string,
 }
 
-export type Theme = "basic-theme"
+export type Theme = "theme-basic"

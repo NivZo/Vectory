@@ -32,7 +32,7 @@
     $: yTicks = rangeAroundZero(...domain.y, $halfHeight > 200 ? 2 : 5);
 </script>
 
-<svg bind:this={svg}>
+<svg bind:this={svg} class="svg-graph">
     <!-- y axis -->
     <g class="axis horizontal-axis">
         {#each range(...domain.y) as lineId}
@@ -119,4 +119,4 @@
     />
 </svg>
 
-<style src="./Graph.css"></style>
+<style src="./Graph.scss"></style>

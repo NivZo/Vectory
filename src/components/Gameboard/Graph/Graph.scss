@@ -1,0 +1,140 @@
+@import '../../../theme/themes.scss';
+
+svg {
+    width: 100vw;
+    height: 50vh;
+    margin: auto;
+
+    @include themify($themes) {
+        background-color: themed(primary);
+    }
+
+    @keyframes hover-reveal {
+        to {
+            stroke-opacity: 20%;
+        }
+    }
+
+    @keyframes path-reveal {
+        to {
+            stroke-opacity: 60%;
+        }
+    }
+
+    circle.path-crd {
+        fill-opacity: 0.6;
+        stroke-opacity: 20%;
+        animation: path-reveal 0.2s ease-in forwards;
+
+        @include themify($themes) {
+            stroke: themed('primaryStroke');
+            fill: themed('primaryPath');
+        }
+    }
+
+    circle.hover-crd {
+        fill-opacity: 0.2;
+        stroke-opacity: 0%;
+        animation: hover-reveal 0.2s linear forwards;
+
+
+        @include themify($themes) {
+            stroke: themed('primaryStroke');
+            fill: themed('primaryPath');
+        }
+    }
+
+    circle.current-crd {
+        @include themify($themes) {
+            fill: themed('primaryCurrent');
+        }
+    }
+
+    circle.target-crd {
+        fill-opacity: 0.6;
+
+        @include themify($themes) {
+            stroke: themed('primaryStroke');
+            fill: themed('primaryGoal');
+        }
+    }
+
+    .path-vector {
+        stroke-dashoffset: 1000;
+        stroke-opacity: 20%;
+        animation: path-reveal 0.2s ease-in forwards;
+
+        @include themify($themes) {
+            stroke: themed('primaryStroke');
+        }
+    }
+
+    .hover-vector {
+        stroke-opacity: 0%;
+        animation: hover-reveal 0.2s linear forwards;
+
+        @include themify($themes) {
+            stroke: themed('primaryStroke');
+        }
+    }
+
+    .tick line {
+        stroke-dasharray: 0.2vmax;
+
+        @include themify($themes) {
+            stroke: themed('primaryGrid');
+        }
+    }
+
+    line.bold-tick {
+        stroke-dasharray: 0;
+    }
+
+    line.cross-axis {
+        stroke-width: 0.25vmax;
+        stroke-dasharray: none;
+    }
+
+    .vertical-axis line.cross-axis {
+        stroke-opacity: 30%;
+
+        @include themify($themes) {
+            stroke: themed('primaryXAxis');
+        }
+    }
+
+    .horizontal-axis line.cross-axis {
+        stroke-opacity: 30%;
+
+        @include themify($themes) {
+            stroke: themed('primaryYAxis');
+        }
+    }
+
+
+    g.vertical-axis line.cross-axis {
+        stroke-opacity: 30%;
+        fill: red;
+        stroke: green;
+
+        // @include themify($themes) {
+        //     fill: themed('primaryGoal');
+        // }
+    }
+
+    text {
+        font-size: 14px;
+
+        @include themify($themes) {
+            fill: themed('primaryText');
+        }
+    }
+
+    .vertical-axis text {
+        text-anchor: middle;
+    }
+
+    .horizontal-axis text {
+        text-anchor: end;
+    }
+}

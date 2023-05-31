@@ -10,4 +10,4 @@ const createTheme = () => {
     };
 };
 
-export const theme = createTheme();
+export const theme = createthemed();

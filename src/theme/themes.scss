@@ -1,0 +1,55 @@
+@function cssVar($varName) {
+    @return var(--#{$varName});
+}
+
+@mixin themify($themes) {
+
+    @each $theme,
+    $map in $themes {
+        main.#{$theme}-theme & {
+            $theme-map: () !global;
+
+            @each $key,
+            $submap in $map {
+                $value: map-get(map-get($themes, $theme), '#{$key}');
+                $theme-map: map-merge($theme-map, ($key: $value)) !global;
+            }
+
+            @content;
+            $theme-map: null !global;
+        }
+    }
+}
+
+@function themed($key) {
+    @return map-get($theme-map, $key);
+}
+
+$themes: (
+    default: (primaryText: #30323D,
+        secondaryText: gray,
+        primaryBackground: #EBF2FA,
+        primaryGrid: #DEE5ED,
+        primaryXAxis: #5DA271,
+        secondaryXAxis: #7DB58D,
+        primaryYAxis: #D16666,
+        secondaryYAxis: #CB5252,
+        primaryCurrent: #4C6085,
+        primaryPath: #30323D,
+        primaryGoal: #E89C21,
+        primaryStroke: black,
+    ),
+    alternate: (primaryText: #30323D,
+        secondaryText: gray,
+        primaryBackground: #EBF2FA,
+        primaryGrid: #DEE5ED,
+        primaryXAxis: #5DA271,
+        secondaryXAxis: #7DB58D,
+        primaryYAxis: #D16666,
+        secondaryYAxis: #CB5252,
+        primaryCurrent: #4C6085,
+        primaryPath: #30323D,
+        primaryGoal: #E89C21,
+        primaryStroke: black,
+    )
+);
