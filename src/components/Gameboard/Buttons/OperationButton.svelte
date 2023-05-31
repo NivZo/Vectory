@@ -4,6 +4,7 @@
     import type { Operation } from "../../../types/Operation";
     import type { Domain } from "../../../types/Display";
     import Button from "./Button/Button.svelte";
+    import { isOperationValid } from "../../../utils/operationUtils";
 
     export let operation: Operation;
     export let domain: Domain;
@@ -30,6 +31,6 @@
     onHover={hoverOperation}
     onClick={applyOperation}
     onMouseLeave={gameSession.removeHoverCoordinate}
-    isEnabled={$isPlayable}
+    isEnabled={$isPlayable && isOperationValid(operation, $currentCoordinate, domain)}
     text={operation.name} 
     />

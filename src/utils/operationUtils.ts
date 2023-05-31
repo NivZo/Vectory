@@ -1,3 +1,5 @@
+import type { Coordinate } from "../types/Coordinate";
+import type { Domain } from "../types/Display";
 import type { Operation, OperationAction, OperationActionConfiguration, OperationCandidate, OperationConfiguration } from "../types/Operation";
 
 // OperationAction factories
@@ -8,29 +10,54 @@ export let yPlus = (plusAmount: number): OperationAction => crd => crd.y + plusA
 export let yMinus = (minusAmount: number): OperationAction => crd => crd.y - minusAmount;
 export let yTimes = (timesAmount: number): OperationAction => crd => crd.y * timesAmount;
 
-export let operationFromConfiguration = (operationConfig: OperationConfiguration): Operation => {
+export const operationFromConfiguration = (operationConfig: OperationConfiguration): Operation => {
     let operationActionFromConfiguration = (candidate: OperationCandidate, operationActionConfig: OperationActionConfiguration): OperationAction => {
-        switch (operationActionConfig.operator) {
-            case "+":
-                return crd => crd[candidate] + operationActionConfig.operatorValue
-            case "-":
-                return crd => crd[candidate] - operationActionConfig.operatorValue
-            case "*":
-                return crd => crd[candidate] * operationActionConfig.operatorValue
-            case "/":
-                return crd => crd[candidate] / operationActionConfig.operatorValue
+        if (operationActionConfig) {
+            switch (operationActionConfig.operator) {
+                case "+":
+                    return crd => crd[candidate] + operationActionConfig.operatorValue
+                case "-":
+                    return crd => crd[candidate] - operationActionConfig.operatorValue
+                case "*":
+                    return crd => crd[candidate] * operationActionConfig.operatorValue
+            }
         }
+        return crd => crd[candidate];
     }
 
     return {
-        name: operationConfig.name,
+        name: operationName(operationConfig),
         xOperation: operationActionFromConfiguration("x", operationConfig.x),
         yOperation: operationActionFromConfiguration("y", operationConfig.y),
     }
 }
 
+export const isInDomain = (crd: Coordinate, domain: Domain) =>
+    crd.x >= domain.x[0] &&
+    crd.x <= domain.x[1] &&
+    crd.y >= domain.y[0] &&
+    crd.y <= domain.y[1];
+
+export const isOperationValid = (operation: Operation, crd: Coordinate, domain: Domain): boolean => {
+    const newCrd: Coordinate = {
+        x: operation.xOperation(crd),
+        y: operation.yOperation(crd),
+    };
+
+    return isInDomain(newCrd, domain);
+}
+
+const operationName = (operationConfig: OperationConfiguration): string => {
+    if (operationConfig.x && operationConfig.y) {
+        return `${operationConfig.x.name} , ${operationConfig.y.name}`
+    }
+    else if (operationConfig.x) {
+        return operationConfig.x.name
+    } else return operationConfig.y.name
+}
+
 // Operations
-export let flipOperation: Operation = {
+export const flipOperation: Operation = {
     name: "Flip",
     xOperation: crd => crd.y,
     yOperation: crd => crd.x,

@@ -12,6 +12,7 @@
 
     let svg;
     const fontSize = 14;
+    const circleRadius = "0.7vmax";
     export let domain: Domain = {
         x: [0, 0],
         y: [0, 0],
@@ -27,9 +28,9 @@
         .domain(domain.y)
         .range([$halfHeight - padding.bottom, padding.top]);
 
-    $: xTicks = rangeAroundZero(...domain.x, $display.width > 200 ? 2 : 5);
+    $: xTicks = rangeAroundZero(...domain.x, domain.x[0] > 30 ? 2 : 5);
 
-    $: yTicks = rangeAroundZero(...domain.y, $halfHeight > 200 ? 2 : 5);
+    $: yTicks = rangeAroundZero(...domain.y, domain.y[0] > 30 ? 2 : 5);
 </script>
 
 <svg bind:this={svg} class="svg-graph">
@@ -84,7 +85,7 @@
         <circle
             cx={xScale(crd.x)}
             cy={yScale(crd.y)}
-            r="5"
+            r={circleRadius}
             class="path-crd"
             class:current-crd={i == $currentPath.length - 1}
         />
@@ -106,7 +107,7 @@
         <circle
             cx={xScale($currentHover.x)}
             cy={yScale($currentHover.y)}
-            r="5"
+            r={circleRadius}
             class="hover-crd"
         />
     {/if}
@@ -114,7 +115,7 @@
     <circle
         cx={xScale($gameSession.targetCoordinate.x)}
         cy={yScale($gameSession.targetCoordinate.y)}
-        r="5"
+        r={circleRadius}
         class="target-crd"
     />
 </svg>

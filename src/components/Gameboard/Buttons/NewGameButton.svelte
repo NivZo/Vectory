@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { gameSession } from "../../../stores/GameSessionStore";
+  import { gameSession, isVictory } from "../../../stores/GameSessionStore";
   import { getRandomGameConfiguration } from "../../../utils/jsonUtils";
     import Button from "./Button/Button.svelte";
 
@@ -9,4 +9,4 @@
   };
 </script>
 
-<Button onClick={initGameSession} text="New"/>
+<Button onClick={initGameSession} text={$isVictory ? "Next" : "New"}/>

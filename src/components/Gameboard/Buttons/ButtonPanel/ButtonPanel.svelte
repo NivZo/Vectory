@@ -9,7 +9,7 @@
 
     export let domain: Domain;
 
-    $: heightPercentage = 100 / ($gameSession.operations.length / 3);
+    const heightPercentage = 50;
 </script>
 
 <div class="btn-panel">
@@ -24,7 +24,7 @@
         </div>
     {/each}
 
-    <div class="btn-panel-row">
+    <div class="btn-panel-row" style="--heightPercentage: {heightPercentage}%">
         <UndoButton />
         <ResetButton />
         <NewGameButton />

@@ -1,11 +1,6 @@
 import type { GameConfiguration, RawGameConfiguration } from "../types/GameSession";
 import { operationFromConfiguration } from "./operationUtils";
-import { puzzles } from "../data/puzzles-3";
-
-export const parseGameConfiguration = (gameConf: string): RawGameConfiguration => {
-    let parsed: RawGameConfiguration = JSON.parse(gameConf);
-    return parsed;
-}
+import { puzzles } from "../data/puzzles";
 
 export const getRandomGameConfiguration = (): GameConfiguration => {
     const randomIndex = Math.floor(Math.random() * puzzles.length);

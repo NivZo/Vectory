@@ -1,7 +1,7 @@
 <script lang="ts">
     export let text: string;
     export let widthPrecentage: number = 30;
-    export let heightPercentage: number = 50;
+    export let heightPercentage: number = 90;
     export let isEnabled: boolean = true;
     export let onHover: () => void = null;
     export let onMouseLeave: () => void = null;
@@ -17,6 +17,7 @@
     style="--widthPrecentage: {widthPrecentage}%; --heightPercentage: {heightPercentage}%"
     class="btn"
     on:mousedown={isEnabled && setIsActive(true)}
+    on:touchstart={isEnabled && onHover}
     on:mouseup={isEnabled && setIsActive(false)}
     on:mouseout={isEnabled && setIsActive(false)}
     on:click={isEnabled && onClick}

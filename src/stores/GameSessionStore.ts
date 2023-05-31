@@ -2,6 +2,7 @@ import { derived, writable } from 'svelte/store';
 import type { GameConfiguration, GameSession } from '../types/GameSession';
 import type { Coordinate } from '../types/Coordinate';
 import type { Domain } from '../types/Display';
+import { isInDomain } from '../utils/operationUtils';
 
 const emptyGameSession: GameSession = {
 	sourceCoordinate: { x: 0, y: 0 },
@@ -15,12 +16,6 @@ const emptyGameSession: GameSession = {
 	},
 	loaded: false,
 };
-
-const isInDomain = (crd: Coordinate, domain: Domain) =>
-	crd.x >= domain.x[0] &&
-	crd.x <= domain.x[1] &&
-	crd.y >= domain.y[0] &&
-	crd.y <= domain.y[1];
 
 const createGameSession = () => {
 	const { subscribe, set, update } = writable<GameSession>(emptyGameSession);
@@ -65,7 +60,7 @@ const createGameSession = () => {
 			};
 
 			return gs;
-		})
+		}),
 	};
 }
 
