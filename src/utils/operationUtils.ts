@@ -52,8 +52,19 @@ const operationName = (operationConfig: OperationConfiguration): string => {
         return `${operationConfig.x.name} , ${operationConfig.y.name}`
     }
     else if (operationConfig.x) {
-        return operationConfig.x.name
-    } else return operationConfig.y.name
+        return operationConfig.x.name + operationSign(operationConfig.x) 
+    } else return operationConfig.y.name + operationSign(operationConfig.y)
+}
+
+const operationSign = (operationActionConfig: OperationActionConfiguration): string => {
+    switch (operationActionConfig.operator) {
+        case "*":
+            return ''
+        case "+":
+            return '  (->)'
+        case "-":
+            return '  (<-)'
+    }
 }
 
 // Operations

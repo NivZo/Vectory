@@ -1,6 +1,5 @@
 @import '../../../../theme/themes.scss';
 
-
 $color-bg: #abb9c2;
 $color-bg-light: #c1c8cd;
 $color-bg-dark: #c1c5c9;
@@ -11,7 +10,6 @@ $color-overlay-dark: #cdd4da;
 $color-tab-focus: #c8cbcd;
 
 .btn {
-  user-select: none;
   width: cssVar(widthPrecentage);
   height: cssVar(heightPercentage);
   display: flex;
@@ -25,7 +23,7 @@ $color-tab-focus: #c8cbcd;
   font-size: 300%;
   text-align: center;
   cursor: pointer;
-  margin: 1%;
+  margin: 2%;
   letter-spacing: .05em;
   transition: all 200ms ease;
   box-shadow:

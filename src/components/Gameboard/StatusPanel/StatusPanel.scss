@@ -1,0 +1,14 @@
+@import '../../../theme/themes.scss';
+
+.status-panel {
+    height: 10vh;
+    display: table;
+    width: 100%;
+    table-layout: fixed
+}
+
+.status-panel span.status-panel-item {
+    display: table-cell;
+    text-align: center;
+    height: 100%;
+}

@@ -15,7 +15,7 @@
 	export let theme = "alternate";
 </script>
 
-<main class="{theme}-theme">
+<main class="{theme}-theme" on:contextmenu|preventDefault={null}>
 	<div id="vectory-app">
 		<Display />
 		<PuzzleSession />

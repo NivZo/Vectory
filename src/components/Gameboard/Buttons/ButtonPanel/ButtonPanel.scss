@@ -1,7 +1,11 @@
 @import '../../../../theme/themes.scss';
 
 .btn-panel {
-    height: 40vh;
+    height: 38vh;
+    margin-bottom: 2vh;
+    background-color: #abb9c2;
+    border: #c1c5c9 0.5vh solid;
+    border-radius: 2vh;
 }
 
 .btn-panel .btn-panel-row {
