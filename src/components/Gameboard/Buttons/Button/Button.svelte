@@ -10,19 +10,31 @@
     let isActive = false;
     let setIsActive = (newValue: boolean) => () => {
         isActive = newValue;
-    }
+    };
 </script>
 
 <div
     style="--widthPrecentage: {widthPrecentage}%; --heightPercentage: {heightPercentage}%"
     class="btn"
     on:mousedown={isEnabled && setIsActive(true)}
-    on:touchstart={isEnabled && onHover}
-    on:mouseup={isEnabled && setIsActive(false)}
+    on:touchstart={isEnabled &&
+        (() => {
+            setIsActive(true)();
+            onHover();
+        })}
+    on:mouseup={isEnabled &&
+        (() => {
+            setIsActive(false)();
+            onClick();
+        })}
     on:mouseout={isEnabled && setIsActive(false)}
-    on:click={isEnabled && onClick}
     on:mouseover={isEnabled && onHover}
     on:mouseleave={isEnabled && onMouseLeave}
+    on:contextmenu|preventDefault={isEnabled &&
+        (() => {
+            onClick();
+            setIsActive(false)();
+        })}
     class:active={isActive}
     class:disabled={!isEnabled}
 >
