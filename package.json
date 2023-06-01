@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "host": "vite --host",
     "start": "vite preview",
     "deploy": "npx gh-pages -d dist"
   },

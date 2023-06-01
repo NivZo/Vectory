@@ -7,33 +7,36 @@
     export let onMouseLeave: () => void = null;
     export let onClick: () => void;
 
+    let isLongPress = false;
+
     let isActive = false;
     let setIsActive = (newValue: boolean) => () => {
         isActive = newValue;
     };
+
+    const isMouseOnButton = (e) => {};
 </script>
 
 <div
     style="--widthPrecentage: {widthPrecentage}%; --heightPercentage: {heightPercentage}%"
     class="btn"
-    on:mousedown={isEnabled && setIsActive(true)}
-    on:touchstart={isEnabled &&
+    on:pointerdown={isEnabled && setIsActive(true)}
+    on:pointerup={isEnabled &&
         (() => {
-            setIsActive(true)();
-            onHover();
-        })}
-    on:mouseup={isEnabled &&
-        (() => {
-            setIsActive(false)();
             onClick();
+            isActive = false;
         })}
-    on:mouseout={isEnabled && setIsActive(false)}
-    on:mouseover={isEnabled && onHover}
-    on:mouseleave={isEnabled && onMouseLeave}
+    on:pointerover={isEnabled && onHover}
+    on:pointerleave={isEnabled &&
+        (() => {
+            onMouseLeave();
+            isActive = false;
+            isLongPress = false;
+        })}
     on:contextmenu|preventDefault={isEnabled &&
         (() => {
-            onClick();
-            setIsActive(false)();
+            setIsActive(true)();
+            isLongPress = true;
         })}
     class:active={isActive}
     class:disabled={!isEnabled}

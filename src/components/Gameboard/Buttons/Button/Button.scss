@@ -23,6 +23,7 @@ $color-tab-focus: #c8cbcd;
   font-size: 300%;
   font-family: 'Caveat';
   text-align: center;
+  white-space: pre-wrap;
   cursor: pointer;
   margin: 2%;
   letter-spacing: .05em;
@@ -61,7 +62,7 @@ $color-tab-focus: #c8cbcd;
   }
 
   &.disabled {
-    opacity: 0.6;
+    opacity: 0.2;
     cursor: auto;
   }
 }

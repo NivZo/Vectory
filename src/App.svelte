@@ -12,7 +12,7 @@
 		gameSession.setGameConfiguration(gameConfiguration);
 	});
 
-	export let theme = "alternate";
+	export let theme = "default";
 </script>
 
 <main class="{theme}-theme" on:contextmenu|preventDefault={null}>

@@ -12,7 +12,8 @@
 
     let svg;
     const fontSize = 14;
-    const circleRadius = "0.7vmax";
+    const pathCircleRadius = "0.5vmax";
+    const highlightCircleRadius = "0.8vmax";
     export let domain: Domain = {
         x: [0, 0],
         y: [0, 0],
@@ -95,7 +96,7 @@
         <circle
             cx={xScale(crd.x)}
             cy={yScale(crd.y)}
-            r={circleRadius}
+            r={!$currentHover && i == $currentPath.length - 1 ? highlightCircleRadius : pathCircleRadius}
             class="path-crd"
             class:current-crd={i == $currentPath.length - 1}
         />
@@ -117,15 +118,18 @@
         <circle
             cx={xScale($currentHover.x)}
             cy={yScale($currentHover.y)}
-            r={circleRadius}
+            r={highlightCircleRadius}
             class="hover-crd"
         />
+        <text x={xScale($currentHover.x) + fontSize} y={yScale($currentHover.y) + fontSize}
+                >({$currentHover.x},{$currentHover.y})</text
+            >
     {/if}
 
     <circle
         cx={xScale($gameSession.targetCoordinate.x)}
         cy={yScale($gameSession.targetCoordinate.y)}
-        r={circleRadius}
+        r={highlightCircleRadius}
         class="target-crd"
     />
 </svg>

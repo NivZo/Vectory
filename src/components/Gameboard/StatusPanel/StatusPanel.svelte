@@ -1,10 +1,10 @@
 <script lang="ts">
     import {
         currentCoordinate,
-        currentPath,
         gameSession,
         remainingMoves,
     } from "../../../stores/GameSessionStore";
+    import { display } from "../../../stores/DisplayStore";
 </script>
 
 <div class="status-panel">

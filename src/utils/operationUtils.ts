@@ -26,7 +26,7 @@ export const operationFromConfiguration = (operationConfig: OperationConfigurati
     }
 
     return {
-        name: operationName(operationConfig),
+        name: prettifyName(operationName(operationConfig)),
         xOperation: operationActionFromConfiguration("x", operationConfig.x),
         yOperation: operationActionFromConfiguration("y", operationConfig.y),
     }
@@ -49,21 +49,23 @@ export const isOperationValid = (operation: Operation, crd: Coordinate, domain: 
 
 const operationName = (operationConfig: OperationConfiguration): string => {
     if (operationConfig.x && operationConfig.y) {
-        return `${operationConfig.x.name} , ${operationConfig.y.name}`
+        return `${operationConfig.x.name + operationSign(operationConfig.x, "horizontal")}\n${operationConfig.y.name + operationSign(operationConfig.y, "vertical")}`
     }
     else if (operationConfig.x) {
-        return operationConfig.x.name + operationSign(operationConfig.x) 
-    } else return operationConfig.y.name + operationSign(operationConfig.y)
+        return operationConfig.x.name + operationSign(operationConfig.x, "horizontal")
+    } else return operationConfig.y.name + operationSign(operationConfig.y, "vertical")
 }
 
-const operationSign = (operationActionConfig: OperationActionConfiguration): string => {
+const prettifyName = (name: string): string => name.toUpperCase().replace('*', '×');
+
+const operationSign = (operationActionConfig: OperationActionConfiguration, alignment: "vertical" | "horizontal"): string => {
     switch (operationActionConfig.operator) {
         case "*":
-            return ''
+            return alignment == "horizontal" ? '  ⇉' : '  ⇈'
         case "+":
-            return '  (->)'
+            return alignment == "horizontal" ? '  →' : '  ↑'
         case "-":
-            return '  (<-)'
+            return alignment == "horizontal" ? '  ←' : '  ↓'
     }
 }
 
