@@ -23,7 +23,6 @@
             y: operation.yOperation($currentCoordinate),
         }
         gameSession.addHoverCoordinate(newCoordinate, domain);
-        console.table($isVictory)
     }
 </script>
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import "./StatusPanel.scss";
+
     import {
         currentCoordinate,
         gameSession,
@@ -27,5 +29,3 @@
         {$remainingMoves}
     </span>
 </div>
-
-<style src="./StatusPanel.scss"></style>

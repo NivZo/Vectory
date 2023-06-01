@@ -1,4 +1,6 @@
 <script lang="ts">
+    import "./Button.scss";
+    
     export let text: string;
     export let widthPrecentage: number = 30;
     export let heightPercentage: number = 90;
@@ -21,4 +23,3 @@
     {text}
 </button>
 
-<style src="./Button.scss"></style>

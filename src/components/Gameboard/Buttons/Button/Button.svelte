@@ -1,4 +1,6 @@
 <script lang="ts">
+    import "./Button.scss";
+
     export let text: string;
     export let widthPrecentage: number = 30;
     export let heightPercentage: number = 90;
@@ -7,14 +9,13 @@
     export let onMouseLeave: () => void = null;
     export let onClick: () => void;
 
+
     let isLongPress = false;
 
     let isActive = false;
     let setIsActive = (newValue: boolean) => () => {
         isActive = newValue;
     };
-
-    const isMouseOnButton = (e) => {};
 </script>
 
 <div
@@ -29,7 +30,7 @@
     on:pointerover={isEnabled && onHover}
     on:pointerleave={isEnabled &&
         (() => {
-            onMouseLeave();
+            onMouseLeave && onMouseLeave();
             isActive = false;
             isLongPress = false;
         })}
@@ -43,5 +44,3 @@
 >
     {text}
 </div>
-
-<style src="./Button.scss"></style>

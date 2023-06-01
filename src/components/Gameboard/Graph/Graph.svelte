@@ -1,4 +1,6 @@
 <script lang="ts">
+    import './Graph.scss';
+
     import { scaleLinear } from "d3-scale";
     import { display, halfHeight } from "../../../stores/DisplayStore";
     import { range, rangeAroundZero } from "../../../utils/mathUtils";
@@ -133,5 +135,3 @@
         class="target-crd"
     />
 </svg>
-
-<style src="./Graph.scss"></style>

@@ -1,4 +1,6 @@
 <script>
+    import "./PuzzleSession.scss";
+
     import { onMount } from "svelte";
     import Graph from "../Graph/Graph.svelte";
     import { gameSession } from "../../../stores/GameSessionStore";
@@ -19,5 +21,3 @@
     <Graph {domain} />
     <ButtonPanel {domain} />
 </div>
-
-<style src="./PuzzleSession.scss"></style>

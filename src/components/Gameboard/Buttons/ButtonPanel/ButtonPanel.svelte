@@ -1,4 +1,6 @@
 <script lang="ts">
+    import "./ButtonPanel.scss";
+
     import UndoButton from "../UndoButton.svelte";
     import NewGameButton from "../NewGameButton.svelte";
     import OperationButton from "../OperationButton.svelte";
@@ -24,11 +26,12 @@
         </div>
     {/each}
 
-    <div class="btn-panel-row" style="--heightPercentage: {rowHeightPercentage}%">
+    <div
+        class="btn-panel-row"
+        style="--heightPercentage: {rowHeightPercentage}%"
+    >
         <UndoButton />
         <ResetButton />
         <NewGameButton />
     </div>
 </div>
-
-<style src="./ButtonPanel.scss"></style>

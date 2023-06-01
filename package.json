@@ -8,7 +8,8 @@
     "dev": "vite",
     "host": "vite --host",
     "start": "vite preview",
-    "deploy": "npx gh-pages -d dist"
+    "deploy": "npx gh-pages -d dist",
+    "bdeploy": "vite build && npx gh-pages -d dist"
   },
   "devDependencies": {
     "@tsconfig/svelte": "^3.0.0",

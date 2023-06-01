@@ -1,4 +1,6 @@
 <script lang="ts">
+	import "./App.scss";
+
 	import { onMount } from "svelte";
 	import { getRandomGameConfiguration } from "./utils/jsonUtils";
 	import { gameSession } from "./stores/GameSessionStore";
@@ -21,5 +23,3 @@
 		<PuzzleSession />
 	</div>
 </main>
-
-<style src="./App.scss"></style>

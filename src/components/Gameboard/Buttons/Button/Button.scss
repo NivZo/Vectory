@@ -1,22 +1,24 @@
 @import '../../../../theme/themes.scss';
 
-$color-bg: #abb9c2;
-$color-bg-light: #c1c8cd;
-$color-bg-dark: #c1c5c9;
-$color-overlay: #B9B5AA;
-$color-overlay-light: #B9B5AA;
-$color-overlay-medium: #929ca3;
-$color-overlay-dark: #cdd4da;
-$color-tab-focus: #c8cbcd;
+// .btn {
+//   @include themify($themes) {
+//     $color-bg: themed('primaryButton');
+//     $color-bg-light: lighten($color-bg, 10%);
+//     $color-bg-dark: darken($color-bg, 10%);
 
-.btn {
+//     $color-overlay: themed('secondaryButton');
+//     $color-overlay-medium: darken($color-overlay, 10%);
+//     $color-overlay-dark: darken($color-overlay, 20%);
+//   }
+// }
+
+div.btn {
   width: cssVar(widthPrecentage);
   height: cssVar(heightPercentage);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: $color-bg;
   border-radius: 10%;
   border: 0;
   font-weight: 800;
@@ -28,38 +30,29 @@ $color-tab-focus: #c8cbcd;
   margin: 2%;
   letter-spacing: .05em;
   transition: all 200ms ease;
-  box-shadow:
-    -1px -1px 1px $color-bg,
-    0 0 0 4px $color-overlay-medium,
-    1px 1px 1px $color-bg-dark,
-    inset .0 .0 .0 $color-overlay-dark,
-    inset .5rem .5rem .25rem $color-bg-light;
 
-  &::-moz-focus-inner {
-    outline: none;
-    border: none;
+  @include themify($themes) {
+    background-color: themed('primaryButton');
+    box-shadow: -0.5vw -0.5vw 1vw themed('primaryButton'),
+      0 0 0 0.4vw darken(themed('primaryButton'), 10%),
+      0.25vw 0.25vw 1vw darken(themed('primaryButton'), 10%),
+      inset .0 .0 .0 darken(themed('secondaryButton'), 10%),
+      inset .5vw .5vw .25vw lighten(themed('secondaryButton'), 10%),
   }
 
-  // &:focus {
-  //   outline: none;
-  //   box-shadow:
-  //     -1px -1px 1px $color-bg-dark,
-  //     0 0 0 4px $color-tab-focus,
-  //     1px 1px 1px $color-bg-dark,
-  //     inset 0 0 0 $color-overlay-dark,
-  //     inset .5rem .5rem .25rem $color-bg-light,
-  //   ;
-  // }
 
   &.active {
-    transform: scale(0.9);
+    transform: scale(0.95);
+
+    @include themify($themes) {
     box-shadow:
-      inset 1px 1px 1px $color-bg,
-      0 0 0 4px $color-overlay-dark,
-      inset -1px -1px 1px $color-bg-light,
-      inset .5rem .5rem .75rem $color-bg-dark,
-      inset .5rem .5rem .5rem $color-bg-light,
+      inset 0.5vw 0.5vw 1vw themed('primaryButton'),
+      0 0 0 0.4vw darken(themed('secondaryButton'), 10%),
+      inset -0.25vw -0.25vw 1vw darken(themed('primaryButton'), 20%),
+      inset .5vw .5vw .75vw darken(themed('secondaryButton'), 10%),
+      inset .5vw .5vw .5vw lighten(themed('primaryButton'), 10%),
   }
+}
 
   &.disabled {
     opacity: 0.2;
