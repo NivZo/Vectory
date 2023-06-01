@@ -1,9 +1,9 @@
 @import '../../../theme/themes.scss';
 
 svg {
-    width: 100vw;
-    height: 50vh;
-    margin: auto;
+    width: 100%;
+    height: 50%;
+    margin: 0;
 
     @include themify($themes) {
         background-color: themed(primary);
@@ -111,19 +111,8 @@ svg {
         }
     }
 
-
-    g.vertical-axis line.cross-axis {
-        stroke-opacity: 30%;
-        fill: red;
-        stroke: green;
-
-        // @include themify($themes) {
-        //     fill: themed('primaryGoal');
-        // }
-    }
-
     text {
-        font-size: 14px;
+        font-size: 2.2vmin;
 
         @include themify($themes) {
             fill: themed('primaryText');
@@ -132,9 +121,11 @@ svg {
 
     .vertical-axis text {
         text-anchor: middle;
+        font-size:1.5vmin;
     }
 
     .horizontal-axis text {
         text-anchor: end;
+        font-size:1.5vmin;
     }
 }

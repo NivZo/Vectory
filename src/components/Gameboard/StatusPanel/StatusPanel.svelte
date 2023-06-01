@@ -9,16 +9,22 @@
 
 <div class="status-panel">
     <span class="status-panel-item"
-        >Current: <b>({$currentCoordinate.x}, {$currentCoordinate.y})</b></span
+        >Current:
+        <br />
+        <b>({$currentCoordinate.x}, {$currentCoordinate.y})</b></span
     >
     <span class="status-panel-item">
         Goal:
+        <br />
         <b>
-            ({$gameSession.targetCoordinate.x}, {$gameSession.targetCoordinate.y})
+            ({$gameSession.targetCoordinate.x}, {$gameSession.targetCoordinate
+                .y})
         </b>
     </span>
     <span class="status-panel-item">
-        Remaining Moves: {$remainingMoves}
+        Moves Left:
+        <br />
+        {$remainingMoves}
     </span>
 </div>
 

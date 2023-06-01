@@ -18,6 +18,16 @@
         y: [0, 0],
     };
 
+    const tickStep = (size: number): number => {
+        if (size < 25) {
+            return 2;
+        }
+        else if (size < 50) {
+            return 5
+        }
+        return 10;
+    }
+
     const padding = { top: 20, right: 40, bottom: 40, left: 25 };
 
     $: xScale = scaleLinear()
@@ -28,9 +38,9 @@
         .domain(domain.y)
         .range([$halfHeight - padding.bottom, padding.top]);
 
-    $: xTicks = rangeAroundZero(...domain.x, domain.x[0] > 30 ? 2 : 5);
+    $: xTicks = rangeAroundZero(...domain.x, tickStep(domain.x[1]));
 
-    $: yTicks = rangeAroundZero(...domain.y, domain.y[0] > 30 ? 2 : 5);
+    $: yTicks = rangeAroundZero(...domain.y, tickStep(domain.y[1]));
 </script>
 
 <svg bind:this={svg} class="svg-graph">
@@ -91,7 +101,7 @@
         />
         {#if i == $currentPath.length - 1}
             <text x={xScale(crd.x) + fontSize} y={yScale(crd.y) + fontSize}
-                >P{i} ({crd.x},{crd.y})</text
+                >({crd.x},{crd.y})</text
             >
         {/if}
     {/each}

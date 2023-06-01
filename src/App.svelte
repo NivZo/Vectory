@@ -3,7 +3,7 @@
 	import { getRandomGameConfiguration } from "./utils/jsonUtils";
 	import { gameSession } from "./stores/GameSessionStore";
 	import Display from "./components/Utility/Display.svelte";
-	import PuzzleSession from "./components/Gameboard/PuzzleSession.svelte";
+	import PuzzleSession from "./components/Gameboard/PuzzleSession/PuzzleSession.svelte";
 
 	let gameConfiguration;
 

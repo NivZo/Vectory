@@ -21,6 +21,7 @@ $color-tab-focus: #c8cbcd;
   border: 0;
   font-weight: 800;
   font-size: 300%;
+  font-family: 'Caveat';
   text-align: center;
   cursor: pointer;
   margin: 2%;
@@ -38,16 +39,16 @@ $color-tab-focus: #c8cbcd;
     border: none;
   }
 
-  &:focus {
-    outline: none;
-    box-shadow:
-      -1px -1px 1px $color-bg-dark,
-      0 0 0 4px $color-tab-focus,
-      1px 1px 1px $color-bg-dark,
-      inset 0 0 0 $color-overlay-dark,
-      inset .5rem .5rem .25rem $color-bg-light,
-    ;
-  }
+  // &:focus {
+  //   outline: none;
+  //   box-shadow:
+  //     -1px -1px 1px $color-bg-dark,
+  //     0 0 0 4px $color-tab-focus,
+  //     1px 1px 1px $color-bg-dark,
+  //     inset 0 0 0 $color-overlay-dark,
+  //     inset .5rem .5rem .25rem $color-bg-light,
+  //   ;
+  // }
 
   &.active {
     transform: scale(0.9);
