@@ -10,16 +10,16 @@
 
     export let domain: Domain;
 
-    const rowHeightPercentage = 37;
+    const rowHeightPercentage = 35;
 </script>
 
 <div class="btn-panel">
-    {#each chunk($gameSession.operations, 3) as operationsChunk, i}
+    {#each chunk($gameSession.operations, 3) as operationsChunk, ci}
         <div
-            class="btn-panel-row btn-panel-row-{i}"
+            class="btn-panel-row btn-panel-row-{ci}"
             style="--heightPercentage: {rowHeightPercentage}%"
         >
-            {#each operationsChunk as operation (operation.x.name + operation.y.name)}
+            {#each operationsChunk as operation, i (i)}
                 <OperationButton {operation} {domain} />
             {/each}
             {#if operationsChunk.length < 3}
