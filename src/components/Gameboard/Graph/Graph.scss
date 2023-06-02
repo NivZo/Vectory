@@ -9,22 +9,9 @@ svg {
         background-color: themed(primary);
     }
 
-    @keyframes hover-reveal {
-        to {
-            stroke-opacity: 20%;
-        }
-    }
-
-    @keyframes path-reveal {
-        to {
-            stroke-opacity: 60%;
-        }
-    }
-
     circle.path-crd {
-        fill-opacity: 0.6;
-        stroke-opacity: 20%;
-        animation: path-reveal 0.2s ease-in forwards;
+        fill-opacity: 0.8;
+        stroke-opacity: 0.3;
 
         @include themify($themes) {
             stroke: themed('primaryStroke');
@@ -33,9 +20,8 @@ svg {
     }
 
     circle.hover-crd {
-        fill-opacity: 0.2;
-        stroke-opacity: 0%;
-        animation: hover-reveal 0.2s linear forwards;
+        fill-opacity: 0.3;
+        stroke-opacity: 0.1;
 
 
         @include themify($themes) {
@@ -51,7 +37,8 @@ svg {
     }
 
     circle.target-crd {
-        fill-opacity: 0.6;
+        fill-opacity: 0.8;
+        stroke-opacity: 0.6;
 
         @include themify($themes) {
             stroke: themed('primaryStroke');
@@ -61,8 +48,7 @@ svg {
 
     .path-vector {
         stroke-dashoffset: 1000;
-        stroke-opacity: 20%;
-        animation: path-reveal 0.2s ease-in forwards;
+        stroke-opacity: 0.4;
 
         @include themify($themes) {
             stroke: themed('primaryStroke');
@@ -70,9 +56,7 @@ svg {
     }
 
     .hover-vector {
-        stroke-opacity: 0%;
-        animation: hover-reveal 0.2s linear forwards;
-
+        stroke-opacity: 0.2;
         @include themify($themes) {
             stroke: themed('primaryStroke');
         }
@@ -88,6 +72,7 @@ svg {
 
     line.bold-tick {
         stroke-dasharray: 0;
+        stroke-width: 0.25vmin;
     }
 
     line.cross-axis {
@@ -96,23 +81,23 @@ svg {
     }
 
     .vertical-axis line.cross-axis {
-        stroke-opacity: 30%;
-
-        @include themify($themes) {
-            stroke: themed('primaryXAxis');
-        }
-    }
-
-    .horizontal-axis line.cross-axis {
-        stroke-opacity: 30%;
+        stroke-opacity: 70%;
 
         @include themify($themes) {
             stroke: themed('primaryYAxis');
         }
     }
 
+    .horizontal-axis line.cross-axis {
+        stroke-opacity: 70%;
+
+        @include themify($themes) {
+            stroke: themed('primaryXAxis');
+        }
+    }
+
     text {
-        font-size: 2.2vmin;
+        font-size:4vmin;
 
         @include themify($themes) {
             fill: themed('primaryText');
@@ -121,11 +106,19 @@ svg {
 
     .vertical-axis text {
         text-anchor: middle;
-        font-size:1.5vmin;
+        font-size: 3.5vmin;
+
+        @include themify($themes) {
+            fill: themed('secondaryText');
+        }
     }
 
     .horizontal-axis text {
         text-anchor: end;
-        font-size:1.5vmin;
+        font-size: 3.5vmin;
+
+        @include themify($themes) {
+            fill: themed('secondaryText');
+        }
     }
 }

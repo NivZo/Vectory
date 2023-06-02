@@ -3,8 +3,8 @@
 .btn-panel {
     height: 40%;
     background-color: #abb9c2;
-    border: #c1c5c9 0.5vh solid;
-    border-radius: 2vh;
+    border: #c1c5c9 0.5% solid;
+    border-radius: 2%;
     box-sizing: border-box;
 }
 
@@ -12,5 +12,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: cssVar(heightPercentage)
+    height: cssVar(heightPercentage);
+    padding-top: 0.5%
 }

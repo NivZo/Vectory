@@ -1,5 +1,9 @@
 <script lang="ts">
-    import { currentCoordinate, gameSession, isPlayable, isVictory } from "../../../stores/GameSessionStore";
+    import {
+        currentCoordinate,
+        gameSession,
+        isPlayable,
+    } from "../../../stores/GameSessionStore";
     import type { Coordinate } from "../../../types/Coordinate";
     import type { Operation } from "../../../types/Operation";
     import type { Domain } from "../../../types/Display";
@@ -8,28 +12,42 @@
 
     export let operation: Operation;
     export let domain: Domain;
+    let classes = [];
+    $: {
+        classes = [];
+        if (!!operation.x.name) {
+            classes.push('x-op-btn');
+        }
+        if (!!operation.y.name) {
+            classes.push('y-op-btn');
+        }
+    }
 
     const applyOperation = (): void => {
         const newCoordinate: Coordinate = {
-            x: operation.xOperation($currentCoordinate),
-            y: operation.yOperation($currentCoordinate),
-        }
+            x: operation.x.action($currentCoordinate),
+            y: operation.y.action($currentCoordinate),
+        };
         gameSession.addCoordinate(newCoordinate, domain);
-    }
+    };
 
     const hoverOperation = (): void => {
         const newCoordinate: Coordinate = {
-            x: operation.xOperation($currentCoordinate),
-            y: operation.yOperation($currentCoordinate),
-        }
+            x: operation.x.action($currentCoordinate),
+            y: operation.y.action($currentCoordinate),
+        };
         gameSession.addHoverCoordinate(newCoordinate, domain);
-    }
+    };
 </script>
 
 <Button
+    {classes}
     onHover={hoverOperation}
     onClick={applyOperation}
     onMouseLeave={gameSession.removeHoverCoordinate}
-    isEnabled={$isPlayable && isOperationValid(operation, $currentCoordinate, domain)}
-    text={operation.name} 
-    />
+    isEnabled={$isPlayable &&
+        isOperationValid(operation, $currentCoordinate, domain)}
+>
+    <span class="x-op-name">{operation.x.name}</span>
+    <span class="y-op-name">{operation.y.name}</span>
+</Button>

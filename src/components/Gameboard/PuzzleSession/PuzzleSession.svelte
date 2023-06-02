@@ -8,6 +8,7 @@
     import { getSessionDomain } from "../../../utils/mathUtils";
     import ButtonPanel from "../Buttons/ButtonPanel/ButtonPanel.svelte";
     import StatusPanel from "../StatusPanel/StatusPanel.svelte";
+    import OptionsPanel from "../OptionsPanel/OptionsPanel.svelte";
 
     onMount(() => {
         gameSession.resetGameState();

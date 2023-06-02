@@ -1,5 +1,5 @@
 <script lang="ts">
-    import './Graph.scss';
+    import "./Graph.scss";
 
     import { scaleLinear } from "d3-scale";
     import { display, halfHeight } from "../../../stores/DisplayStore";
@@ -11,9 +11,9 @@
         gameSession,
     } from "../../../stores/GameSessionStore";
     import type { Domain } from "../../../types/Display";
+    import { fade } from "svelte/transition";
 
     let svg;
-    const fontSize = 14;
     const pathCircleRadius = "0.5vmax";
     const highlightCircleRadius = "0.8vmax";
     export let domain: Domain = {
@@ -21,17 +21,22 @@
         y: [0, 0],
     };
 
-    const tickStep = (size: number): number => {
-        if (size < 25) {
+    const calcTickStep = (size: number): number => {
+        if (size < 15) {
             return 2;
         }
-        else if (size < 50) {
-            return 5
-        }
-        return 10;
-    }
+        const partial = size / 3.5;
+        return partial - (partial % 5);
+    };
 
-    const padding = { top: 20, right: 40, bottom: 40, left: 25 };
+    $: fontSize = 0.025 * Math.min($display.height, $display.width);
+
+    $: padding = {
+        top: 0.025 * $display.height,
+        right: 0.025 * $display.width,
+        bottom: 0.025 * $display.height + fontSize,
+        left: 0.04 * $display.width + fontSize,
+    };
 
     $: xScale = scaleLinear()
         .domain(domain.x)
@@ -41,12 +46,17 @@
         .domain(domain.y)
         .range([$halfHeight - padding.bottom, padding.top]);
 
-    $: xTicks = rangeAroundZero(...domain.x, tickStep(domain.x[1]));
+    $: tickStep = Math.max(
+        calcTickStep(domain.x[1]),
+        calcTickStep(domain.y[1])
+    );
 
-    $: yTicks = rangeAroundZero(...domain.y, tickStep(domain.y[1]));
+    $: xTicks = rangeAroundZero(...domain.x, tickStep);
+
+    $: yTicks = rangeAroundZero(...domain.y, tickStep);
 </script>
 
-<svg bind:this={svg} class="svg-graph">
+<svg bind:this={svg} class="svg-graph" id="graph">
     <!-- y axis -->
     <g class="axis horizontal-axis">
         {#each range(...domain.y) as lineId}
@@ -57,11 +67,13 @@
                 <line
                     x1={padding.left}
                     x2={xScale(domain.x[1])}
-                    class:cross-axis={lineId == 0}
                     class:bold-tick={yTicks.indexOf(lineId) >= 0}
                 />
                 {#if yTicks.indexOf(lineId) >= 0}
-                    <text x={padding.left - 8} y="+4">{lineId}</text>
+                    <text
+                        x={padding.left - fontSize * 0.75}
+                        y="+{fontSize * 0.4}">{lineId}</text
+                    >
                 {/if}
             </g>
         {/each}
@@ -74,58 +86,90 @@
                 <line
                     y1={yScale(domain.y[0])}
                     y2={yScale(domain.y[1])}
-                    class:cross-axis={lineId == 0}
-                    class:bold-tick={yTicks.indexOf(lineId) >= 0}
+                    class:bold-tick={xTicks.indexOf(lineId) >= 0}
                 />
                 {#if xTicks.indexOf(lineId) >= 0}
-                    <text y={$halfHeight - padding.bottom + 16}>{lineId}</text>
+                    <text
+                        x="-{fontSize * (lineId >= 0 ? 0.2 : 0.5)}"
+                        y={$halfHeight - (padding.bottom - fontSize * 1.25)}
+                        >{lineId}</text
+                    >
                 {/if}
             </g>
         {/each}
     </g>
+    <g class="vertical-axis" transform="translate({xScale(0)},0)">
+        <line
+            y1={yScale(domain.y[0])}
+            y2={yScale(domain.y[1])}
+            class="cross-axis bold-tick"
+        />
+    </g>
+
+    <g class="horizontal-axis" transform="translate(0,{yScale(0)})">
+        <line
+            x1={padding.left}
+            x2={xScale(domain.x[1])}
+            class="cross-axis bold-tick"
+        />
+    </g>
 
     <!-- data -->
+    <!-- draw lines -->
     {#each $currentPath as crd, i}
-        {#if i > 0}
-            <line
-                x1={xScale($currentPath[i - 1].x)}
-                y1={yScale($currentPath[i - 1].y)}
-                x2={xScale(crd.x)}
-                y2={yScale(crd.y)}
-                class="path-vector"
-            />
-        {/if}
+        <g transition:fade={{ duration: 100 }}>
+            {#if i > 0}
+                <line
+                    x1={xScale($currentPath[i - 1].x)}
+                    y1={yScale($currentPath[i - 1].y)}
+                    x2={xScale(crd.x)}
+                    y2={yScale(crd.y)}
+                    class="path-vector"
+                />
+            {/if}
+        </g>
+    {/each}
+
+    <!-- draw circles -->
+    {#each $currentPath as crd, i}
         <circle
             cx={xScale(crd.x)}
             cy={yScale(crd.y)}
-            r={!$currentHover && i == $currentPath.length - 1 ? highlightCircleRadius : pathCircleRadius}
+            r={!$currentHover && i == $currentPath.length - 1
+                ? highlightCircleRadius
+                : pathCircleRadius}
             class="path-crd"
             class:current-crd={i == $currentPath.length - 1}
         />
-        {#if i == $currentPath.length - 1}
-            <text x={xScale(crd.x) + fontSize} y={yScale(crd.y) + fontSize}
-                >({crd.x},{crd.y})</text
+        {#if !$currentHover && i == $currentPath.length - 1}
+            <text
+                x={xScale(crd.x) + fontSize * 0.5}
+                y={yScale(crd.y) + fontSize * 0.5}>({crd.x},{crd.y})</text
             >
         {/if}
     {/each}
 
     {#if $currentHover}
-        <line
-            x1={xScale($currentCoordinate.x)}
-            y1={yScale($currentCoordinate.y)}
-            x2={xScale($currentHover.x)}
-            y2={yScale($currentHover.y)}
-            class="hover-vector"
-        />
-        <circle
-            cx={xScale($currentHover.x)}
-            cy={yScale($currentHover.y)}
-            r={highlightCircleRadius}
-            class="hover-crd"
-        />
-        <text x={xScale($currentHover.x) + fontSize} y={yScale($currentHover.y) + fontSize}
+        <g in:fade={{ duration: 100 }}>
+            <line
+                x1={xScale($currentCoordinate.x)}
+                y1={yScale($currentCoordinate.y)}
+                x2={xScale($currentHover.x)}
+                y2={yScale($currentHover.y)}
+                class="hover-vector"
+            />
+            <circle
+                cx={xScale($currentHover.x)}
+                cy={yScale($currentHover.y)}
+                r={highlightCircleRadius}
+                class="hover-crd"
+            />
+            <text
+                x={xScale($currentHover.x) + fontSize * 0.5}
+                y={yScale($currentHover.y) + fontSize * 0.5}
                 >({$currentHover.x},{$currentHover.y})</text
             >
+        </g>
     {/if}
 
     <circle

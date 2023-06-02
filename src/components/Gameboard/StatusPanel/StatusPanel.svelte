@@ -7,6 +7,7 @@
         remainingMoves,
     } from "../../../stores/GameSessionStore";
     import { display } from "../../../stores/DisplayStore";
+    import { admin } from "../../../stores/AdminStore";
 </script>
 
 <div class="status-panel">
@@ -23,7 +24,7 @@
                 .y})
         </b>
     </span>
-    <span class="status-panel-item">
+    <span class="status-panel-item" on:click={admin.toggleAdmin}>
         Moves Left:
         <br />
         {$remainingMoves}

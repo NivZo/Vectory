@@ -1,17 +1,16 @@
 <script lang="ts">
     import "./ButtonPanel.scss";
 
-    import UndoButton from "../UndoButton.svelte";
-    import NewGameButton from "../NewGameButton.svelte";
     import OperationButton from "../OperationButton.svelte";
-    import ResetButton from "../ResetButton.svelte";
     import { gameSession } from "../../../../stores/GameSessionStore";
     import type { Domain } from "../../../../types/Display";
-    import { chunk } from "../../../../utils/mathUtils";
+    import { chunk, range } from "../../../../utils/mathUtils";
+    import Button from "../Button/Button.svelte";
+    import OptionsPanel from "../../OptionsPanel/OptionsPanel.svelte";
 
     export let domain: Domain;
 
-    const rowHeightPercentage = 50;
+    const rowHeightPercentage = 37;
 </script>
 
 <div class="btn-panel">
@@ -20,18 +19,25 @@
             class="btn-panel-row btn-panel-row-{i}"
             style="--heightPercentage: {rowHeightPercentage}%"
         >
-            {#each operationsChunk as operation (operation.name)}
+            {#each operationsChunk as operation (operation.x.name + operation.y.name)}
                 <OperationButton {operation} {domain} />
             {/each}
+            {#if operationsChunk.length < 3}
+                {#each range(0, 2 - operationsChunk.length) as _}
+                    <Button isEnabled={false} />
+                {/each}
+            {/if}
         </div>
     {/each}
-
-    <div
-        class="btn-panel-row"
-        style="--heightPercentage: {rowHeightPercentage}%"
-    >
-        <UndoButton />
-        <ResetButton />
-        <NewGameButton />
-    </div>
+    {#if $gameSession.operations.length <= 3}
+        <div
+            class="btn-panel-row btn-panel-row-{1}"
+            style="--heightPercentage: {rowHeightPercentage}%"
+        >
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+        </div>
+    {/if}
+    <OptionsPanel />
 </div>

@@ -1,7 +1,8 @@
 <script lang="ts">
+    import { admin } from "../../../stores/AdminStore";
   import { gameSession, isVictory } from "../../../stores/GameSessionStore";
   import { getRandomGameConfiguration } from "../../../utils/jsonUtils";
-    import Button from "./Button/Button.svelte";
+  import Button from "./Button/Button.svelte";
 
   const initGameSession = () => {
     const gameConfiguration = getRandomGameConfiguration();
@@ -9,4 +10,4 @@
   };
 </script>
 
-<Button onClick={initGameSession} text={$isVictory ? "Next" : "New"}/>
+<Button onClick={initGameSession} isEnabled={$admin || $isVictory} classes={$isVictory ? ["success-btn"] : []}>Next</Button>

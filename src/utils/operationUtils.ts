@@ -1,6 +1,6 @@
 import type { Coordinate } from "../types/Coordinate";
 import type { Domain } from "../types/Display";
-import type { Operation, OperationAction, OperationActionConfiguration, OperationCandidate, OperationConfiguration } from "../types/Operation";
+import type { AxisOperation, Operation, OperationAction, OperationActionConfiguration, OperationCandidate, OperationConfiguration } from "../types/Operation";
 
 // OperationAction factories
 export let xPlus = (plusAmount: number): OperationAction => crd => crd.x + plusAmount;
@@ -26,9 +26,14 @@ export const operationFromConfiguration = (operationConfig: OperationConfigurati
     }
 
     return {
-        name: prettifyName(operationName(operationConfig)),
-        xOperation: operationActionFromConfiguration("x", operationConfig.x),
-        yOperation: operationActionFromConfiguration("y", operationConfig.y),
+        x: operationConfig.x ? {
+            name: operationName("x", operationConfig.x),
+            action: operationActionFromConfiguration("x", operationConfig.x),
+        } : emptyOperation.x,
+        y: operationConfig.y ? {
+            name: operationName("y", operationConfig.y),
+            action: operationActionFromConfiguration("y", operationConfig.y),
+        } : emptyOperation.y,
     }
 }
 
@@ -40,23 +45,14 @@ export const isInDomain = (crd: Coordinate, domain: Domain) =>
 
 export const isOperationValid = (operation: Operation, crd: Coordinate, domain: Domain): boolean => {
     const newCrd: Coordinate = {
-        x: operation.xOperation(crd),
-        y: operation.yOperation(crd),
+        x: operation.x.action(crd),
+        y: operation.y.action(crd),
     };
 
     return isInDomain(newCrd, domain);
 }
 
-const operationName = (operationConfig: OperationConfiguration): string => {
-    if (operationConfig.x && operationConfig.y) {
-        return `${operationConfig.x.name + operationSign(operationConfig.x, "horizontal")}\n${operationConfig.y.name + operationSign(operationConfig.y, "vertical")}`
-    }
-    else if (operationConfig.x) {
-        return operationConfig.x.name + operationSign(operationConfig.x, "horizontal")
-    } else return operationConfig.y.name + operationSign(operationConfig.y, "vertical")
-}
-
-const prettifyName = (name: string): string => name.toUpperCase().replace('*', '×');
+const operationName = (cand: OperationCandidate, operationActionConfig: OperationActionConfiguration): string => `${cand}${operationActionConfig.operator}${operationActionConfig.operatorValue}`.toUpperCase().replace('*', '×');
 
 const operationSign = (operationActionConfig: OperationActionConfiguration, alignment: "vertical" | "horizontal"): string => {
     switch (operationActionConfig.operator) {
@@ -70,8 +66,19 @@ const operationSign = (operationActionConfig: OperationActionConfiguration, alig
 }
 
 // Operations
-export const flipOperation: Operation = {
-    name: "Flip",
-    xOperation: crd => crd.y,
-    yOperation: crd => crd.x,
-};
+// export const flipOperation: Operation = {
+//     name: "Flip",
+//     xOperation: crd => crd.y,
+//     yOperation: crd => crd.x,
+// };
+
+const emptyOperation: Operation = {
+    x: {
+        name: "",
+        action: crd => crd.x,
+    },
+    y: {
+        name: "",
+        action: crd => crd.y,
+    },
+}
