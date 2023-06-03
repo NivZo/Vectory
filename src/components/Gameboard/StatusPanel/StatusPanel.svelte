@@ -16,6 +16,11 @@
         <br />
         <b>({$currentCoordinate.x}, {$currentCoordinate.y})</b></span
     >
+    <span class="status-panel-item" on:click={admin.toggleAdmin}>
+        Moves Left:
+        <br />
+        {$remainingMoves}
+    </span>
     <span class="status-panel-item">
         Goal:
         <br />
@@ -23,10 +28,5 @@
             ({$gameSession.targetCoordinate.x}, {$gameSession.targetCoordinate
                 .y})
         </b>
-    </span>
-    <span class="status-panel-item" on:click={admin.toggleAdmin}>
-        Moves Left:
-        <br />
-        {$remainingMoves}
     </span>
 </div>

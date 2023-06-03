@@ -1,0 +1,99 @@
+@import '../../../../theme/themes.scss';
+
+// .btn {
+//   @include themify($themes) {
+//     $color-bg: themed($primaryColor);
+//     $color-bg-light: lighten($color-bg, 10%);
+//     $color-bg-dark: darken($color-bg, 10%);
+
+//     $color-overlay: themed($secondaryColor);
+//     $color-overlay-medium: darken($color-overlay, 10%);
+//     $color-overlay-dark: darken($color-overlay, 20%);
+//   }
+// }
+
+@mixin buttonColor($primaryColor, $secondaryColor) {
+  @include themify($themes) {
+    background-color: transparentize(themed($primaryColor), 0.2);
+    box-shadow: -0.5vw -0.5vw 1vw themed('primaryButton'),
+      0 0 0 0.4vw darken(themed('primaryButton'), 10%),
+      0.25vw 0.25vw 1vw darken(themed('primaryButton'), 10%),
+      inset .0 .0 .0 darken(themed($secondaryColor), 10%),
+      inset .5vw .5vw .25vw transparentize(themed($secondaryColor), 0.1),
+  }
+
+  &.active {
+    transform: scale(0.95);
+
+    @include themify($themes) {
+      box-shadow:
+        inset 0.5vw 0.5vw 1vw themed($primaryColor),
+        0 0 0 0.4vw darken(themed('secondaryButton'), 10%),
+        inset -0.25vw -0.25vw 1vw darken(themed($primaryColor), 20%),
+        inset .5vw .5vw .75vw darken(themed($secondaryColor), 10%),
+        inset .5vw .5vw .5vw lighten(themed($primaryColor), 10%),
+    }
+  }
+}
+
+;
+
+div.btn {
+  width: cssVar(widthPrecentage);
+  height: cssVar(heightPercentage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 10%;
+  border: 0;
+  font-weight: 800;
+  font-size: 300%;
+  font-family: 'Caveat';
+  text-align: center;
+  white-space: pre-wrap;
+  cursor: pointer;
+  margin: 2%;
+  letter-spacing: .05em;
+  transition: all 200ms ease;
+  @include buttonColor('primaryButton', 'secondaryButton');
+
+  &.warn-btn {
+    @include buttonColor('primaryGoal', 'primaryGoal');
+  }
+
+  &.success-btn {
+    @include buttonColor('primaryCurrent', 'primaryCurrent');
+  }
+
+  &.x-op-btn {
+    @include buttonColor('primaryXAxis', 'secondaryXAxis');
+  }
+
+  &.y-op-btn {
+    @include buttonColor('primaryYAxis', 'secondaryYAxis');
+  }
+
+  &.x-op-btn.y-op-btn {
+    span.x-op-name {
+      margin-left: 10%;
+      margin-right: auto;
+    }
+
+    span.y-op-name {
+      margin-left: auto;
+      margin-right: 10%;
+    }
+
+    @include buttonColor('primaryButton', 'secondaryButton');
+
+    @include themify($themes) {
+      background: linear-gradient(90deg, transparentize(themed('primaryXAxis'), 0.2), 50%, transparentize(themed('primaryYAxis'), 0.2) 50%);
+    }
+  }
+
+  &.disabled {
+    opacity: 0.2;
+    cursor: auto;
+  }
+}

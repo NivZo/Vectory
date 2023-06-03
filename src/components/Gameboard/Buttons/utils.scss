@@ -1,0 +1,29 @@
+@import '../../../theme/themes.scss';
+
+@mixin buttonColor($buttonColor) {
+    .btn-face {
+        @include themify($themes) {
+            background-color: themed($buttonColor);
+        }
+    }
+
+    .btn-bg {
+        @include themify($themes) {
+            background-color: darken(themed($buttonColor), 10%);
+        }
+    }
+}
+
+@mixin buttonGradientColor($buttonColor1, $buttonColor2) {
+    .btn-face {
+        @include themify($themes) {
+            background: linear-gradient(90deg, rgba(themed($buttonColor1), 1), 50%, rgba(themed($buttonColor2), 1) 50%);
+        }
+    }
+
+    .btn-bg {
+        @include themify($themes) {
+            background: linear-gradient(90deg, rgba(darken(themed($buttonColor1), 10%), 1), 50%, rgba(darken(themed($buttonColor2), 10%), 1) 50%);
+        }
+    }
+}

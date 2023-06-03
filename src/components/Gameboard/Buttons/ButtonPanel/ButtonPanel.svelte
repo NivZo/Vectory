@@ -1,7 +1,7 @@
 <script lang="ts">
     import "./ButtonPanel.scss";
 
-    import OperationButton from "../OperationButton.svelte";
+    import OperationButton from "../OperationButton/OperationButton.svelte";
     import { gameSession } from "../../../../stores/GameSessionStore";
     import type { Domain } from "../../../../types/Display";
     import { chunk, range } from "../../../../utils/mathUtils";

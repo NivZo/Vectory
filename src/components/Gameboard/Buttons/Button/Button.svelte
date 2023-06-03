@@ -1,5 +1,6 @@
 <script lang="ts">
-import "./Button.scss";
+    import { element } from "svelte/internal";
+    import "./Button.scss";
 
     export let widthPrecentage: number = 30;
     export let heightPercentage: number = 90;
@@ -15,31 +16,50 @@ import "./Button.scss";
     let setIsActive = (newValue: boolean) => () => {
         isActive = newValue;
     };
+
+    const isOnButtonTouch = (ev) => {
+        let rect = ev.target.getBoundingClientRect();
+        let touch = ev.changedTouches[0];
+        console.table({
+            rectx: rect,
+            touch,
+        });
+        return (
+            touch.clientX > rect.x &&
+            touch.clientX < rect.x + rect.width &&
+            touch.clientY > rect.y &&
+            touch.clientY < rect.y + rect.height
+        );
+    };
 </script>
 
 <div
-    style="--widthPrecentage: {widthPrecentage}%; --heightPercentage: {heightPercentage}%"
-    class={"btn" + (!!classes ? " " : "") + classes.join(" ")}
-    on:pointerdown={isEnabled && setIsActive(true)}
+    class={"btn-container" + (!!classes ? " " : "") + classes.join(" ")}
+    class:active={isActive}
+    class:disabled={!isEnabled}
+    style="--widthPrecentage: {widthPrecentage}%; --heightPercentage: {heightPercentage}%;"
     on:pointerup={isEnabled &&
         (() => {
             onClick();
             isActive = false;
+            !!onMouseLeave && onMouseLeave();
         })}
+    on:pointerdown={isEnabled && setIsActive(true)}
     on:pointerover={isEnabled && onHover}
-    on:pointerleave={isEnabled &&
-        (() => {
-            onMouseLeave && onMouseLeave();
-            isActive = false;
-            isLongPress = false;
+    on:contextmenu|preventDefault={() => null}
+    on:touchend={isEnabled &&
+        ((ev) => {
+            if (isActive) {
+                setIsActive(false)();
+                !!onMouseLeave && onMouseLeave();
+                if (isOnButtonTouch(ev)) {
+                    onClick();
+                }
+            }
         })}
-    on:contextmenu|preventDefault={isEnabled &&
-        (() => {
-            setIsActive(true)();
-            isLongPress = true;
-        })}
-    class:active={isActive}
-    class:disabled={!isEnabled}
 >
-    <slot />
+    <div class="btn-bg" />
+    <div class={"btn-face"}>
+        <slot />
+    </div>
 </div>

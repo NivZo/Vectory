@@ -10,4 +10,4 @@ export const onHoverOrMouseDown = (node, callback) => {
         node.removeEventListener('touchstart', callback)
       } 
     }
-  }
+  };

@@ -49,10 +49,11 @@ export const isOperationValid = (operation: Operation, crd: Coordinate, domain: 
         y: operation.y.action(crd),
     };
 
-    return isInDomain(newCrd, domain);
+    return !(newCrd.x == crd.x && newCrd.y == crd.y) &&
+        isInDomain(newCrd, domain);
 }
 
-const operationName = (cand: OperationCandidate, operationActionConfig: OperationActionConfiguration): string => `${cand}${operationActionConfig.operator}${operationActionConfig.operatorValue}`.toUpperCase().replace('*', '×');
+const operationName = (cand: OperationCandidate, operationActionConfig: OperationActionConfiguration): string => `${operationActionConfig.operator}${operationActionConfig.operatorValue}`.toUpperCase().replace('*', '×');
 
 const operationSign = (operationActionConfig: OperationActionConfiguration, alignment: "vertical" | "horizontal"): string => {
     switch (operationActionConfig.operator) {

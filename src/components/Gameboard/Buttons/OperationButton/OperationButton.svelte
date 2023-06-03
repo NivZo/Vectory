@@ -1,14 +1,15 @@
 <script lang="ts">
+    import './OperationButton.scss';
     import {
         currentCoordinate,
         gameSession,
         isPlayable,
-    } from "../../../stores/GameSessionStore";
-    import type { Coordinate } from "../../../types/Coordinate";
-    import type { Operation } from "../../../types/Operation";
-    import type { Domain } from "../../../types/Display";
-    import Button from "./Button/Button.svelte";
-    import { isOperationValid } from "../../../utils/operationUtils";
+    } from "../../../../stores/GameSessionStore";
+    import type { Coordinate } from "../../../../types/Coordinate";
+    import type { Operation } from "../../../../types/Operation";
+    import type { Domain } from "../../../../types/Display";
+    import Button from "../Button/Button.svelte";
+    import { isOperationValid } from "../../../../utils/operationUtils";
 
     export let operation: Operation;
     export let domain: Domain;

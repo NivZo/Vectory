@@ -19,7 +19,8 @@
 
 <main class="{theme}-theme" on:contextmenu|preventDefault={null}>
 	<div id="vectory-app">
-		<Display />
-		<PuzzleSession />
+		<Display>
+			<PuzzleSession />
+		</Display>
 	</div>
 </main>

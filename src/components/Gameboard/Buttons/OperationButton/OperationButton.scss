@@ -1,0 +1,47 @@
+@import '../utils.scss';
+
+.btn-container {
+    .btn-face {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        margin: auto;
+        align-items: center;
+        vertical-align: middle;
+    }
+
+    &.x-op-btn.y-op-btn {
+        span.x-op-name {
+            text-align: left;
+            width: 50%;
+            margin-left: 10%;
+            margin-right: auto;
+        }
+
+        span.y-op-name {
+            text-align: right;
+            width: 50%;
+            margin: 0 12.5%;
+        }
+    }
+
+    &.warn-btn {
+        @include buttonColor('primaryGoal');
+    }
+
+    &.success-btn {
+        @include buttonColor('primaryCurrent');}
+
+    &.x-op-btn {
+        @include buttonColor('primaryXAxis');
+    }
+
+    &.y-op-btn {
+        @include buttonColor('primaryYAxis');
+    }
+
+    &.x-op-btn.y-op-btn {
+        @include buttonGradientColor('primaryXAxis', 'primaryYAxis')
+    }
+
+}
