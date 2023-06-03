@@ -6,12 +6,12 @@
     import { setContext } from "svelte";
     import Button from "../Buttons/Button/Button.svelte";
 
-    setContext('isSurePrompt', false);
+    setContext("isSurePrompt", false);
 </script>
 
 <div class="options-panel">
     <UndoButton />
-    <Button isEnabled={false} />
+    <Button isEnabled={false}>Level:</Button>
     <!-- <ResetButton /> -->
     <NewGameButton />
 </div>

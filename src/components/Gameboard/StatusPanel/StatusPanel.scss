@@ -3,14 +3,22 @@
 .status-panel {
     height: 7.5%;
     padding-top: 2.5%;
+    margin-bottom: 2.5%;
     display: table;
     width: 100%;
-    table-layout: fixed
+    table-layout: fixed;
+    border-bottom-left-radius: 2vw;
+    border-bottom-right-radius: 2vw;
+
+    @include themify($themes) {
+        background-color: lighten(themed('primaryNeutral'), 5%);
+    }
 }
 
 .status-panel span.status-panel-item {
     display: table-cell;
     text-align: center;
     height: 100%;
-    font-size: 300%;
+    font-size: 3vh;
+    line-height: 100%;
 }

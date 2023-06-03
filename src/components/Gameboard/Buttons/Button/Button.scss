@@ -9,7 +9,7 @@ div.btn-container {
   letter-spacing: .05em;
   transition: all 200ms ease;
   
-  @include buttonColor('primaryButton');
+  @include buttonColor('primaryNeutral');
 
   div.btn-bg {
     width: 100%;
@@ -35,7 +35,7 @@ div.btn-container {
     transition: all 100ms ease-out;
 
 
-    // @include buttonColor('primaryButton', 'secondaryButton');
+    // @include buttonColor('primaryNeutral', 'secondaryButton');
 
     // @include themify($themes) {
     //   background: linear-gradient(90deg, transparentize(themed('primaryXAxis'), 0.2), 50%, transparentize(themed('primaryYAxis'), 0.2) 50%);
