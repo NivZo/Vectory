@@ -2,7 +2,7 @@
     import "./OptionsPanel.scss";
     import UndoButton from "../Buttons/UndoButton.svelte";
     import ResetButton from "../Buttons/ResetButton.svelte";
-    import NewGameButton from "../Buttons/NewGameButton.svelte";
+    import NextButton from "../Buttons/NextButton.svelte";
     import { setContext } from "svelte";
     import Button from "../Buttons/Button/Button.svelte";
 
@@ -13,5 +13,5 @@
     <UndoButton />
     <Button isEnabled={false}>Level:</Button>
     <!-- <ResetButton /> -->
-    <NewGameButton />
+    <NextButton />
 </div>

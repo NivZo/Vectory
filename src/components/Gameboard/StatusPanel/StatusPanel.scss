@@ -1,8 +1,7 @@
 @import '../../../theme/themes.scss';
 
 .status-panel {
-    height: 7.5%;
-    padding-top: 2.5%;
+    // height: 7.5%;
     margin-bottom: 2.5%;
     display: table;
     width: 100%;
@@ -13,12 +12,27 @@
     @include themify($themes) {
         background-color: lighten(themed('primaryNeutral'), 5%);
     }
-}
 
-.status-panel span.status-panel-item {
-    display: table-cell;
-    text-align: center;
-    height: 100%;
-    font-size: 3vh;
-    line-height: 100%;
+    span.status-panel-item {
+        display: table-cell;
+        text-align: center;
+        height: 100%;
+        font-size: 2.5vh;
+        line-height: 100%;
+        padding-top: 2.5%;
+
+        &:not(:last-child) {
+            @include themify($themes) {
+                border-right: 0.5vw solid darken(themed('primaryNeutral'), 5%);
+            }
+        }
+
+        &.status-panel-level-item {
+            border-bottom-left-radius: 2vw;
+
+            @include themify($themes) {
+                background-color: darken(themed('primaryNeutral'), 5%);
+            }
+        }
+    }
 }

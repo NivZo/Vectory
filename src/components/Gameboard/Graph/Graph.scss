@@ -2,16 +2,18 @@
 
 div.graph-panel {
     width: 100%;
-    height: 50%;
+    height: 100%;
+    padding: 0;
 
     svg {
         width: 95%;
         height: 100%;
-        margin: 1.25% 2.5%;
+        margin: 1.25%;
         border-radius: 2vw;
 
         @include themify($themes) {
             background-color: themed('primaryBackground');
+            border: 1vw solid themed('secondaryBackground');
         }
 
         circle.path-crd {
@@ -36,8 +38,10 @@ div.graph-panel {
         }
 
         circle.current-crd {
+            fill-opacity: 1;
+
             @include themify($themes) {
-                fill: themed('primaryCurrent');
+                fill: themed('primaryWarning');
             }
         }
 
@@ -78,7 +82,7 @@ div.graph-panel {
 
         line.bold-tick {
             stroke-dasharray: 0;
-            stroke-width: 0.25vmin;
+            stroke-width: 0.5vmin;
         }
 
         line.cross-axis {

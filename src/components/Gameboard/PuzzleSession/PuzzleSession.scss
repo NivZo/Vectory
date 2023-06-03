@@ -1,4 +1,44 @@
 .puzzle-session {
     width: 100%;
     height: 100%;
+
+    display: grid;
+
+    &.portrait {
+        grid-template-columns: 1fr;
+        grid-template-rows: 10% 50% 40%;
+
+        .status-panel {
+            grid-row: 1;
+        }
+
+        .graph-panel {
+            grid-row: 2;
+        }
+
+        .buttons-panel {
+            grid-row: 3
+        }
+    }
+
+    &.landscape {
+        grid-template-columns: 50% 50%;
+        grid-template-rows: 20% 80%;
+
+        .status-panel {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .graph-panel {
+            grid-column: 1;
+            grid-row-start: 1;
+            grid-row-end: span 2;
+        }
+
+        .buttons-panel {
+            grid-column: 2;
+            grid-row: 2
+        }
+    }
 }

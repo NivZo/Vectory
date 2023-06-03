@@ -69,8 +69,8 @@
                     />
                     {#if yTicks.indexOf(lineId) >= 0}
                         <text
-                            x={padding.left - fontSize * 0.5}
-                            y="+{fontSize * 0.3}">{lineId}</text
+                            x={padding.left - fontSize * 0.4}
+                            y="+{fontSize * 0.35}">{lineId}</text
                         >
                     {/if}
                 </g>
@@ -142,7 +142,7 @@
             {#if !$currentHover && i == $currentPath.length - 1}
                 <text
                     x={xScale(crd.x) + fontSize * 0.5}
-                    y={yScale(crd.y) + fontSize * 0.5}>({crd.x},{crd.y})</text
+                    y={yScale(crd.y) + fontSize}>({crd.x},{crd.y})</text
                 >
             {/if}
         {/each}
@@ -164,7 +164,7 @@
                 />
                 <text
                     x={xScale($currentHover.x) + fontSize * 0.5}
-                    y={yScale($currentHover.y) + fontSize * 0.5}
+                    y={yScale($currentHover.y) + fontSize}
                     >({$currentHover.x},{$currentHover.y})</text
                 >
             </g>

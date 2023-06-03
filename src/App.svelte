@@ -2,7 +2,7 @@
 	import "./App.scss";
 
 	import { onMount } from "svelte";
-	import { getRandomGameConfiguration } from "./utils/jsonUtils";
+	import { getNextGameConfiguration } from "./utils/fileUtils";
 	import { gameSession } from "./stores/GameSessionStore";
 	import Display from "./components/Utility/Display.svelte";
 	import PuzzleSession from "./components/Gameboard/PuzzleSession/PuzzleSession.svelte";
@@ -10,7 +10,7 @@
 	let gameConfiguration;
 
 	onMount(() => {
-		gameConfiguration = getRandomGameConfiguration();
+		gameConfiguration = getNextGameConfiguration();
 		gameSession.setGameConfiguration(gameConfiguration);
 	});
 
