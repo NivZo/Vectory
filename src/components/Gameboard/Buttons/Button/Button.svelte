@@ -20,10 +20,6 @@
     const isOnButtonTouch = (ev) => {
         let rect = ev.target.getBoundingClientRect();
         let touch = ev.changedTouches[0];
-        console.table({
-            rectx: rect,
-            touch,
-        });
         return (
             touch.clientX > rect.x &&
             touch.clientX < rect.x + rect.width &&

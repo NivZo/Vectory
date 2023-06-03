@@ -1,14 +1,17 @@
 <script lang="ts">
+    import { getContext, setContext } from "svelte";
     import { currentPath, gameSession } from "../../../stores/GameSessionStore";
     import Button from "./Button/Button.svelte";
 
-    export let overrideOnClick: () => void = null;
+    $: isSurePrompt = getContext("isSurePrompt");
 </script>
 
 <Button
-    classes={!!overrideOnClick ? ['warn-btn'] : []}
-    onClick={!!overrideOnClick
-        ? overrideOnClick
+    classes={!!isSurePrompt ? ["warn-btn"] : []}
+    onClick={!!isSurePrompt
+        ? () => {
+              setContext("isSurePrompt", false);
+          }
         : gameSession.removeLastCoordinate}
     isEnabled={!($currentPath.length <= 1)}>Undo</Button
 >

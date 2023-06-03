@@ -26,11 +26,11 @@
     }
 
     &.warn-btn {
-        @include buttonColor('primaryGoal');
+        @include buttonColor('primaryWarning');
     }
 
     &.success-btn {
-        @include buttonColor('primaryCurrent');}
+        @include buttonColor('primarySuccess');}
 
     &.x-op-btn {
         @include buttonColor('primaryXAxis');

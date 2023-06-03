@@ -3,18 +3,15 @@
     import UndoButton from "../Buttons/UndoButton.svelte";
     import ResetButton from "../Buttons/ResetButton.svelte";
     import NewGameButton from "../Buttons/NewGameButton.svelte";
+    import { setContext } from "svelte";
+    import Button from "../Buttons/Button/Button.svelte";
 
-    let isSurePrompt = false;
+    setContext('isSurePrompt', false);
 </script>
 
 <div class="options-panel">
-    <UndoButton
-        overrideOnClick={isSurePrompt
-            ? () => {
-                  isSurePrompt = false;
-              }
-            : null}
-    />
-    <ResetButton bind:isSurePrompt={isSurePrompt} />
+    <UndoButton />
+    <Button isEnabled={false} />
+    <!-- <ResetButton /> -->
     <NewGameButton />
 </div>

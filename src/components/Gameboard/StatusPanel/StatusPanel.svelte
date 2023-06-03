@@ -17,9 +17,9 @@
         <b>({$currentCoordinate.x}, {$currentCoordinate.y})</b></span
     >
     <span class="status-panel-item" on:click={admin.toggleAdmin}>
-        Moves Left:
+        Moves:
         <br />
-        {$remainingMoves}
+        <b>{$remainingMoves}</b>
     </span>
     <span class="status-panel-item">
         Goal:

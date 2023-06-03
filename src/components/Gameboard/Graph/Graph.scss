@@ -46,8 +46,8 @@ div.graph-panel {
             stroke-opacity: 0.6;
 
             @include themify($themes) {
-                stroke: themed('primaryStroke');
-                fill: themed('primaryGoal');
+                stroke: themed('primaryCurrent');
+                fill: transparentize($color: themed('primaryCurrent'), $amount: 0.8);
             }
         }
 

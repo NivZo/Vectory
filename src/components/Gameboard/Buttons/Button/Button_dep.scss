@@ -59,7 +59,7 @@ div.btn {
   @include buttonColor('primaryButton', 'secondaryButton');
 
   &.warn-btn {
-    @include buttonColor('primaryGoal', 'primaryGoal');
+    @include buttonColor('primaryWarning', 'primaryWarning');
   }
 
   &.success-btn {

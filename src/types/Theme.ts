@@ -7,7 +7,7 @@ export type dep_Theme = {
     primaryYAxis: string,
     secondaryYAxis: string,
     primaryPath: string,
-    primaryGoal: string,
+    primaryWarning: string,
 }
 
 export type Theme = "theme-basic"
