@@ -1,0 +1,16 @@
+#vectory-logo {
+    position: absolute;
+    top: 0;
+    margin: 30% 10%;
+    width: 80%;
+    height: auto;
+
+    text {
+        @font-face {
+            font-family: 'Urbanist';
+            src: url('../../../fonts/Urbanist.ttf') format('truetype')
+        }
+
+        font-family: 'Urbanist';
+    }
+}

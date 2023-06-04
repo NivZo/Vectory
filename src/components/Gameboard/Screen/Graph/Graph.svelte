@@ -2,25 +2,22 @@
     import "./Graph.scss";
 
     import { scaleLinear } from "d3-scale";
-    import { display, halfHeight } from "../../../stores/DisplayStore";
-    import { range, rangeAroundZero } from "../../../utils/mathUtils";
+    import { display, halfHeight } from "../../../../stores/DisplayStore";
+    import { getSessionDomain, rangeAroundZero } from "../../../../utils/mathUtils";
     import {
         currentHover,
         currentPath,
         currentCoordinate,
         gameSession,
-    } from "../../../stores/GameSessionStore";
-    import type { Domain } from "../../../types/Display";
-    import { fade, fly } from "svelte/transition";
+    } from "../../../../stores/GameSessionStore";
+    import type { Domain } from "../../../../types/Display";
+    import { fade } from "svelte/transition";
 
     let svg;
     const pathCircleRadius = "0.5vmax";
     const highlightCircleRadius = "0.8vmax";
-    export let domain: Domain = {
-        x: [0, 0],
-        y: [0, 0],
-    };
-
+    
+    
     const calcTickStep = (size: number): number => {
         if (size < 10) {
             return 2
@@ -29,6 +26,8 @@
         return Math.max(partial - (partial % 5), 5);
     };
 
+    $: domain = getSessionDomain($gameSession.boardSideSize, $display);
+    
     $: fontSize = 0.05 * $display.width;
 
     $: padding = {
@@ -56,7 +55,7 @@
     $: yTicks = rangeAroundZero(...domain.y, tickStep);
 </script>
 
-<div class="graph-panel">
+<div class="graph-panel" in:fade={{delay: 300, duration: 300}} out:fade={{duration: 300}}>
     <svg bind:this={svg} class="svg-graph" id="graph">
         <!-- y axis -->
         <g class="axis horizontal-axis">

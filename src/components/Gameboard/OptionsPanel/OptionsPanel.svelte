@@ -5,12 +5,18 @@
     import Button from "../Buttons/Button/Button.svelte";
     import { isVictory } from "../../../stores/GameSessionStore";
     import { admin } from "../../../stores/AdminStore";
+    import { mainScreen } from "../../../stores/MainScreenStore";
+    import MenuButton from "../Buttons/MenuButton.svelte";
 </script>
 
 <div class="options-panel">
-    <Button isEnabled={false}>Good</Button>
-    <svelte:component this={$admin || $isVictory ? NextButton : UndoButton} />
-    <Button isEnabled={false}>Luck</Button>
+    <MenuButton />
+    <svelte:component
+        this={$admin || $isVictory || $mainScreen == "menu"
+            ? NextButton
+            : UndoButton}
+    />
+    <Button isEnabled={false}>Hint</Button>
     <!-- <UndoButton /> -->
     <!-- <NextButton /> -->
 </div>

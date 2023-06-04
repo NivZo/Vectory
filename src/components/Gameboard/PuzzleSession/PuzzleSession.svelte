@@ -2,12 +2,13 @@
     import "./PuzzleSession.scss";
 
     import { onMount } from "svelte";
-    import Graph from "../Graph/Graph.svelte";
+    import Graph from "../Screen/Graph/Graph.svelte";
     import { gameSession } from "../../../stores/GameSessionStore";
     import { display } from "../../../stores/DisplayStore";
     import { getSessionDomain } from "../../../utils/mathUtils";
     import ButtonPanel from "../Buttons/ButtonPanel/ButtonPanel.svelte";
     import StatusPanel from "../StatusPanel/StatusPanel.svelte";
+    import MainScreen from "../Screen/MainScreen.svelte";
 
     onMount(() => {
         gameSession.resetGameState();
@@ -23,6 +24,6 @@
     class:portrait={isPortrait}
 >
     <StatusPanel />
-    <Graph {domain} />
+    <MainScreen />
     <ButtonPanel {domain} />
 </div>

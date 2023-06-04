@@ -7,6 +7,7 @@
     import { chunk, range } from "../../../../utils/mathUtils";
     import Button from "../Button/Button.svelte";
     import OptionsPanel from "../../OptionsPanel/OptionsPanel.svelte";
+    import { mainScreen } from "../../../../stores/MainScreenStore";
 
     export let domain: Domain;
 
@@ -14,22 +15,58 @@
 </script>
 
 <div class="btn-panel">
-    {#each chunk($gameSession.operations, 3) as operationsChunk, ci}
+    {#if $mainScreen == "menu"}
         <div
-            class="btn-panel-row btn-panel-row-{ci}"
+            class="btn-panel-row btn-panel-row-{1}"
             style="--heightPercentage: {rowHeightPercentage}%"
         >
-            {#each operationsChunk as operation, i (i)}
-                <OperationButton {operation} {domain} />
-            {/each}
-            {#if operationsChunk.length < 3}
-                {#each range(0, 2 - operationsChunk.length) as _}
-                    <Button isEnabled={false} />
-                {/each}
-            {/if}
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
         </div>
-    {/each}
-    {#if $gameSession.operations.length <= 3}
+        <div
+            class="btn-panel-row btn-panel-row-{1}"
+            style="--heightPercentage: {rowHeightPercentage}%"
+        >
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+        </div>
+    {:else if $mainScreen == "graph"}
+        {#each chunk($gameSession.operations, 3) as operationsChunk, ci}
+            <div
+                class="btn-panel-row btn-panel-row-{ci}"
+                style="--heightPercentage: {rowHeightPercentage}%"
+            >
+                {#each operationsChunk as operation, i (i)}
+                    <OperationButton {operation} {domain} />
+                {/each}
+                {#if operationsChunk.length < 3}
+                    {#each range(0, 2 - operationsChunk.length) as _}
+                        <Button isEnabled={false} />
+                    {/each}
+                {/if}
+            </div>
+        {/each}
+        {#if $gameSession.operations.length <= 3}
+            <div
+                class="btn-panel-row btn-panel-row-{1}"
+                style="--heightPercentage: {rowHeightPercentage}%"
+            >
+                <Button isEnabled={false} />
+                <Button isEnabled={false} />
+                <Button isEnabled={false} />
+            </div>
+        {/if}
+    {:else if $mainScreen == "victory"}
+        <div
+            class="btn-panel-row btn-panel-row-{1}"
+            style="--heightPercentage: {rowHeightPercentage}%"
+        >
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+            <Button isEnabled={false} />
+        </div>
         <div
             class="btn-panel-row btn-panel-row-{1}"
             style="--heightPercentage: {rowHeightPercentage}%"

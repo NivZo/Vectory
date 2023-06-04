@@ -1,6 +1,7 @@
 <script lang="ts">
     import { element } from "svelte/internal";
     import "./Button.scss";
+    import { fade } from "svelte/transition";
 
     export let widthPrecentage: number = 30;
     export let heightPercentage: number = 90;

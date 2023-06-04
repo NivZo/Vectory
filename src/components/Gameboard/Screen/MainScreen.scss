@@ -1,0 +1,13 @@
+@import '../../../theme/themes.scss';
+
+.screen-panel {
+    width: 95%;
+    height: 100%;
+    margin: 1.25%;
+    border-radius: 2vw;
+
+    @include themify($themes) {
+        border: 1vw solid themed('secondaryBackground');
+        background-color: themed('primaryBackground');
+    }
+}

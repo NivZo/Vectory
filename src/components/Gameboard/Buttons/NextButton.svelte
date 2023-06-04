@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { admin } from "../../../stores/AdminStore";
+  import { admin } from "../../../stores/AdminStore";
   import { gameSession, isVictory } from "../../../stores/GameSessionStore";
-    import { currentLevel } from "../../../stores/LocalStorageStore";
+  import { currentLevel } from "../../../stores/LocalStorageStore";
+  import { mainScreen } from "../../../stores/MainScreenStore";
   import { getNextGameConfiguration } from "../../../utils/fileUtils";
   import Button from "./Button/Button.svelte";
 
@@ -10,10 +11,19 @@
     gameSession.setGameConfiguration(gameConfiguration);
   };
 
-  const advanceLevel = () => {
-    currentLevel.increment();
-    initGameSession();
-  }
+  const advanceMainScreen = () => {
+    if ($mainScreen == "victory") {
+      currentLevel.increment();
+      initGameSession();
+    }
+    mainScreen.toNextScreen();
+  };
 </script>
 
-<Button onClick={advanceLevel} isEnabled={$admin || $isVictory} classes={["success-btn"]}>Next</Button>
+<Button
+  onClick={advanceMainScreen}
+  isEnabled={$admin || $isVictory || $mainScreen == "menu"}
+  classes={["success-btn"]}
+>
+  {$mainScreen == "menu" ? "Play" : "Next"}
+</Button>

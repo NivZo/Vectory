@@ -1,4 +1,4 @@
-@import '../../../theme/themes.scss';
+@import '../../../../theme/themes.scss';
 
 div.graph-panel {
     width: 100%;
@@ -6,14 +6,12 @@ div.graph-panel {
     padding: 0;
 
     svg {
-        width: 95%;
+        width: 100%;
         height: 100%;
-        margin: 1.25%;
         border-radius: 2vw;
 
         @include themify($themes) {
             background-color: themed('primaryBackground');
-            border: 1vw solid themed('secondaryBackground');
         }
 
         circle.path-crd {
