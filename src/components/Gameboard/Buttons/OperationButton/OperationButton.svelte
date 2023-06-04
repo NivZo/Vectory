@@ -1,5 +1,5 @@
 <script lang="ts">
-    import './OperationButton.scss';
+    import "./OperationButton.scss";
     import {
         currentCoordinate,
         gameSession,
@@ -10,6 +10,7 @@
     import type { Domain } from "../../../../types/Display";
     import Button from "../Button/Button.svelte";
     import { isOperationValid } from "../../../../utils/operationUtils";
+    import { fly } from "svelte/transition";
 
     export let operation: Operation;
     export let domain: Domain;
@@ -17,10 +18,10 @@
     $: {
         classes = [];
         if (!!operation.x.name) {
-            classes.push('x-op-btn');
+            classes.push("x-op-btn");
         }
         if (!!operation.y.name) {
-            classes.push('y-op-btn');
+            classes.push("y-op-btn");
         }
     }
 
@@ -49,6 +50,10 @@
     isEnabled={$isPlayable &&
         isOperationValid(operation, $currentCoordinate, domain)}
 >
+    {#key operation.x.name}
     <span class="x-op-name">{operation.x.name}</span>
+    {/key}
+    {#key operation.y.name}
     <span class="y-op-name">{operation.y.name}</span>
+    {/key}
 </Button>

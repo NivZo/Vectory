@@ -8,8 +8,16 @@ div.btn-container {
   margin: 5% 2% 3% 2%;
   letter-spacing: .05em;
   transition: all 200ms ease;
-  
+
   @include buttonColor('primaryNeutral');
+
+  &.warn-btn {
+    @include buttonColor('primaryWarning');
+  }
+
+  &.success-btn {
+    @include buttonColor('primarySuccess');
+  }
 
   div.btn-bg {
     width: 100%;
@@ -33,13 +41,6 @@ div.btn-container {
     justify-content: center;
     transform: translateY(-1vh);
     transition: all 100ms ease-out;
-
-
-    // @include buttonColor('primaryNeutral', 'secondaryButton');
-
-    // @include themify($themes) {
-    //   background: linear-gradient(90deg, transparentize(themed('primaryXAxis'), 0.2), 50%, transparentize(themed('primaryYAxis'), 0.2) 50%);
-    // }
   }
 
   &.active {

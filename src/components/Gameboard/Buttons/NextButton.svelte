@@ -16,4 +16,4 @@
   }
 </script>
 
-<Button onClick={advanceLevel} isEnabled={$admin || $isVictory} classes={$isVictory ? ["success-btn"] : []}>Next</Button>
+<Button onClick={advanceLevel} isEnabled={$admin || $isVictory} classes={["success-btn"]}>Next</Button>

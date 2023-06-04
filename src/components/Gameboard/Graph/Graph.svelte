@@ -11,7 +11,7 @@
         gameSession,
     } from "../../../stores/GameSessionStore";
     import type { Domain } from "../../../types/Display";
-    import { fade } from "svelte/transition";
+    import { fade, fly } from "svelte/transition";
 
     let svg;
     const pathCircleRadius = "0.5vmax";
@@ -22,8 +22,11 @@
     };
 
     const calcTickStep = (size: number): number => {
+        if (size < 10) {
+            return 2
+        }
         const partial = size / 2.5;
-        return Math.max((partial - (partial % 5)), 5);
+        return Math.max(partial - (partial % 5), 5);
     };
 
     $: fontSize = 0.05 * $display.width;
@@ -57,7 +60,7 @@
     <svg bind:this={svg} class="svg-graph" id="graph">
         <!-- y axis -->
         <g class="axis horizontal-axis">
-            {#each rangeAroundZero(...domain.y, Math.max(1, tickStep/5)) as lineId}
+            {#each rangeAroundZero(...domain.y, Math.max(1, tickStep / 5)) as lineId}
                 <g
                     class="tick tick-{lineId}"
                     transform="translate(0, {yScale(lineId)})"
@@ -79,7 +82,7 @@
 
         <!-- x axis -->
         <g class="axis vertical-axis">
-            {#each rangeAroundZero(...domain.x, Math.max(1, tickStep/5)) as lineId}
+            {#each rangeAroundZero(...domain.x, Math.max(1, tickStep / 5)) as lineId}
                 <g class="tick" transform="translate({xScale(lineId)},0)">
                     <line
                         y1={yScale(domain.y[0])}

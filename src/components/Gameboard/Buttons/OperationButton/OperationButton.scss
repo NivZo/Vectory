@@ -25,13 +25,6 @@
         }
     }
 
-    &.warn-btn {
-        @include buttonColor('primaryWarning');
-    }
-
-    &.success-btn {
-        @include buttonColor('primarySuccess');}
-
     &.x-op-btn {
         @include buttonColor('primaryXAxis');
     }

@@ -1,17 +1,16 @@
 <script lang="ts">
     import "./OptionsPanel.scss";
     import UndoButton from "../Buttons/UndoButton.svelte";
-    import ResetButton from "../Buttons/ResetButton.svelte";
     import NextButton from "../Buttons/NextButton.svelte";
-    import { setContext } from "svelte";
     import Button from "../Buttons/Button/Button.svelte";
-
-    setContext("isSurePrompt", false);
+    import { isVictory } from "../../../stores/GameSessionStore";
+    import { admin } from "../../../stores/AdminStore";
 </script>
 
 <div class="options-panel">
-    <UndoButton />
-    <Button isEnabled={false}>Level:</Button>
-    <!-- <ResetButton /> -->
-    <NextButton />
+    <Button isEnabled={false}>Good</Button>
+    <svelte:component this={$admin || $isVictory ? NextButton : UndoButton} />
+    <Button isEnabled={false}>Luck</Button>
+    <!-- <UndoButton /> -->
+    <!-- <NextButton /> -->
 </div>

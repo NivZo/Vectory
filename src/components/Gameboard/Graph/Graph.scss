@@ -27,7 +27,7 @@ div.graph-panel {
         }
 
         circle.hover-crd {
-            fill-opacity: 0.3;
+            fill-opacity: 0.4;
             stroke-opacity: 0.1;
 
 
@@ -65,7 +65,7 @@ div.graph-panel {
         }
 
         .hover-vector {
-            stroke-opacity: 0.2;
+            stroke-opacity: 0.4;
 
             @include themify($themes) {
                 stroke: themed('primaryStroke');
