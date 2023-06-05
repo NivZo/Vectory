@@ -1,4 +1,5 @@
 <script lang="ts">
+    import "./Menu.scss";
     import { fade } from "svelte/transition";
     import Logo from "../../../Visuals/Logo/Logo.svelte";
 

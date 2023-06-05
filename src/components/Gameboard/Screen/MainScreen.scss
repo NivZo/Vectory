@@ -1,8 +1,8 @@
 @import '../../../theme/themes.scss';
 
 .screen-panel {
-    width: 95%;
-    height: 100%;
+    width: calc(97.5% - 2vw);
+    height: calc(97.5% - 2vw);
     margin: 1.25%;
     border-radius: 2vw;
 

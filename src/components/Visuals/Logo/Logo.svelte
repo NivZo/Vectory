@@ -35,7 +35,7 @@
             font-family="&quot;eAZkWzVF2GR1:::Urbanist&quot;"
             font-size="72"
             font-weight="400"
-            transform="translate(75 150)"
+            transform="translate(75 152.5)"
             fill="#444850"
             stroke-width="0"
             in:fade={{ duration: 800, delay: 200 }}
@@ -48,7 +48,7 @@
             fill="none"
             stroke="#444850"
             stroke-width="3"
-            in:fade={{ duration: 500, delay: 0 }}
+            in:fade={{ duration: 500, delay: 1500 }}
         /></g
     >
 </svg>

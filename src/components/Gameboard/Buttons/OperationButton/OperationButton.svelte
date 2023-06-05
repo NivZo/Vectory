@@ -10,7 +10,7 @@
     import type { Domain } from "../../../../types/Display";
     import Button from "../Button/Button.svelte";
     import { isOperationValid } from "../../../../utils/operationUtils";
-    import { fly } from "svelte/transition";
+    import { fade, fly } from "svelte/transition";
 
     export let operation: Operation;
     export let domain: Domain;
@@ -51,9 +51,13 @@
         isOperationValid(operation, $currentCoordinate, domain)}
 >
     {#key operation.x.name}
-    <span class="x-op-name">{operation.x.name}</span>
+        <span class="x-op-name" in:fade={{ duration: 300 }}
+            >{operation.x.name}</span
+        >
     {/key}
     {#key operation.y.name}
-    <span class="y-op-name">{operation.y.name}</span>
+        <span class="y-op-name" in:fade={{ duration: 300 }}
+            >{operation.y.name}</span
+        >
     {/key}
 </Button>

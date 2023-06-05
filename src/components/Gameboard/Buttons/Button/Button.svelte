@@ -28,6 +28,15 @@
             touch.clientY < rect.y + rect.height
         );
     };
+
+    const backgroundColorFade = (node, { delay = 0, duration = 300 }) => {
+        const bgColor = getComputedStyle(node).backgroundColor;
+        return {
+            delay,
+            duration,
+            css: (t) => `background-color: rgba(${bgColor}, ${t})`,
+        };
+    };
 </script>
 
 <div
@@ -56,7 +65,7 @@
         })}
 >
     <div class="btn-bg" />
-    <div class={"btn-face"}>
+    <div class="btn-face">
         <slot />
     </div>
 </div>

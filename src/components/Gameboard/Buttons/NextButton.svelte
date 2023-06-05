@@ -22,7 +22,7 @@
 
 <Button
   onClick={advanceMainScreen}
-  isEnabled={$admin || $isVictory || $mainScreen == "menu"}
+  isEnabled={$mainScreen == "graph" ? ($admin || $isVictory) : true}
   classes={["success-btn"]}
 >
   {$mainScreen == "menu" ? "Play" : "Next"}
