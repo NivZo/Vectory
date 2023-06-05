@@ -9,11 +9,10 @@ const createMainScreen = () => {
         toNextScreen: () => update(curr => {
             switch (curr) {
                 case "menu":
+                case "victory":
                     return "graph";
                 case "graph":
                     return "victory";
-                case "victory":
-                    return "menu";
             }
         }),
         toMenu: () => set("menu"),
