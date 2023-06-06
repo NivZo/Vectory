@@ -16,10 +16,10 @@
     span.status-panel-item {
         display: table-cell;
         text-align: center;
+        vertical-align: middle;
         height: 100%;
         font-size: 2.5vh;
         line-height: 100%;
-        padding-top: 2.5%;
 
         &:not(:last-child) {
             @include themify($themes) {

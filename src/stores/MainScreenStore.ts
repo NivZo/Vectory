@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { derived, writable } from 'svelte/store';
 import type { MainScreenMode } from '../types/MainScreen';
 
 const createMainScreen = () => {

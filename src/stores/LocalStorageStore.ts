@@ -1,5 +1,5 @@
 // store.js
-import { writable, type Writable } from 'svelte/store';
+import { derived, writable, type Writable } from 'svelte/store';
 // import { readFromLocalStorage } from '../utils/fileUtils';
 
 const readFromLocalStorage = <T>(key, defaultValue: T = null): T => {
@@ -41,3 +41,28 @@ export const currentLevel: CurrentLevelStore = {
         currentLevelWritable.update(current => current + 1);
     }
 };
+
+const levelRewardAmount = 10;
+const pointsPerRank = 100;
+type ExperiencePoints = number;
+type ExperiencePointsStore = Writable<ExperiencePoints> & {
+    read: (defaultValue?: ExperiencePoints) => ExperiencePoints,
+    levelReward: () => void,
+};
+
+export const experiencePointsKey = "experiencePoints";
+const experiencePointsWritable = createLocalStorageStore<ExperiencePoints>(experiencePointsKey, 0);
+export const experiencePoints: ExperiencePointsStore = {
+    ...experiencePointsWritable,
+    levelReward: () => {
+        experiencePointsWritable.update(current => current + levelRewardAmount);
+    }
+};
+export const experienceRank = derived(
+    experiencePoints,
+    $experiencePoints => Math.round($experiencePoints / pointsPerRank) + 1,
+);
+export const currentRankExperiencePoints = derived(
+    experiencePoints,
+    $experiencePoints => $experiencePoints % pointsPerRank,
+);

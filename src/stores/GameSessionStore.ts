@@ -3,6 +3,8 @@ import type { GameConfiguration, GameSession } from '../types/GameSession';
 import type { Coordinate } from '../types/Coordinate';
 import type { Domain } from '../types/Display';
 import { isInDomain } from '../utils/operationUtils';
+import { mainScreen } from './MainScreenStore';
+import { admin } from './AdminStore';
 
 const emptyGameSession: GameSession = {
 	sourceCoordinate: { x: 0, y: 0 },
@@ -93,4 +95,6 @@ export const isPlayable = derived(
 	([iv, rm]) => iv ? false : rm > 0,
 );
 
-
+export const showNextButton = derived(
+	[mainScreen, admin, isVictory],
+	([$mainScreen, $admin, $isVictory]) => $mainScreen == "graph" ? ($admin || $isVictory) : true,)

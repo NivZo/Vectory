@@ -1,7 +1,12 @@
 <script lang="ts">
-  import { admin } from "../../../stores/AdminStore";
-  import { gameSession, isVictory } from "../../../stores/GameSessionStore";
-  import { currentLevel } from "../../../stores/LocalStorageStore";
+  import {
+    gameSession,
+    showNextButton,
+  } from "../../../stores/GameSessionStore";
+  import {
+    currentLevel,
+    experiencePoints,
+  } from "../../../stores/LocalStorageStore";
   import { mainScreen } from "../../../stores/MainScreenStore";
   import { getNextGameConfiguration } from "../../../utils/fileUtils";
   import Button from "./Button/Button.svelte";
@@ -12,17 +17,25 @@
   };
 
   const advanceMainScreen = () => {
-    if ($mainScreen == "victory") {
-      currentLevel.increment();
-      initGameSession();
-    }
+    switch ($mainScreen) {
+      case "victory":
+        currentLevel.increment();
+        initGameSession();
+        break;
+      case "graph":
+        experiencePoints.levelReward();
+        break;
+      default:
+        break;
+    };
+
     mainScreen.toNextScreen();
   };
 </script>
 
 <Button
   onClick={advanceMainScreen}
-  isEnabled={$mainScreen == "graph" ? ($admin || $isVictory) : true}
+  isEnabled={$showNextButton}
   classes={["success-btn"]}
 >
   {$mainScreen == "menu" ? "Play" : "Next"}

@@ -1,7 +1,5 @@
 <script lang="ts">
-    import { element } from "svelte/internal";
     import "./Button.scss";
-    import { fade } from "svelte/transition";
 
     export let widthPrecentage: number = 30;
     export let heightPercentage: number = 90;
@@ -10,8 +8,6 @@
     export let onHover: () => void = null;
     export let onMouseLeave: () => void = null;
     export let onClick: () => void = null;
-
-    let isLongPress = false;
 
     let isActive = false;
     let setIsActive = (newValue: boolean) => () => {
@@ -27,15 +23,6 @@
             touch.clientY > rect.y &&
             touch.clientY < rect.y + rect.height
         );
-    };
-
-    const backgroundColorFade = (node, { delay = 0, duration = 300 }) => {
-        const bgColor = getComputedStyle(node).backgroundColor;
-        return {
-            delay,
-            duration,
-            css: (t) => `background-color: rgba(${bgColor}, ${t})`,
-        };
     };
 </script>
 

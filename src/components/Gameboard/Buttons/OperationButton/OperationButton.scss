@@ -26,14 +26,17 @@
     }
 
     &.x-op-btn {
+        font-family: "Urbanist";
         @include buttonColor('primaryXAxis');
     }
 
     &.y-op-btn {
+        font-family: "Urbanist";
         @include buttonColor('primaryYAxis');
     }
 
     &.x-op-btn.y-op-btn {
+        font-family: "Urbanist";
         @include buttonGradientColor('primaryXAxis', 'primaryYAxis')
     }
 

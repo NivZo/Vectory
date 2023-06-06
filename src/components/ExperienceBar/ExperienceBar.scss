@@ -1,0 +1,12 @@
+@import '../../theme/themes.scss';
+
+
+progress {
+    margin-top: 50%;
+    height: 30%;
+    width: 100%;
+
+    @include themify($themes) {
+        accent-color: themed('primaryNeutral');
+    }
+}

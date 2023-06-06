@@ -28,7 +28,7 @@
 
     $: domain = getSessionDomain($gameSession.boardSideSize, $display);
     
-    $: fontSize = 0.05 * $display.width;
+    $: fontSize = 0.06 * $display.width;
 
     $: padding = {
         top: fontSize,
